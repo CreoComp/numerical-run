@@ -19,11 +19,6 @@ public class Invincibility : Consumable
         return 1500;
     }
 
-	public override int GetPremiumCost()
-	{
-		return 5;
-	}
-
 	public override void Tick(CharacterInputController c)
     {
         base.Tick(c);

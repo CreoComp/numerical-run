@@ -19,11 +19,6 @@ public class Score2Multiplier : Consumable
         return 750;
     }
 
-	public override int GetPremiumCost()
-	{
-		return 0;
-	}
-
 	public override IEnumerator Started(CharacterInputController c)
     {
         yield return base.Started(c);

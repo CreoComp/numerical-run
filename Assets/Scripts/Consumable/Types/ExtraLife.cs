@@ -22,18 +22,6 @@ public class ExtraLife : Consumable
         return 2000;
     }
 
-	public override int GetPremiumCost()
-	{
-		return 5;
-	}
-
-    public override bool CanBeUsed(CharacterInputController c)
-    {
-        if (c.currentLife == c.maxLife)
-            return false;
-
-        return true;
-    }
 
     public override IEnumerator Started(CharacterInputController c)
     {

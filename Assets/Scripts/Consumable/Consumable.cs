@@ -38,7 +38,6 @@ public abstract class Consumable : MonoBehaviour
     public abstract ConsumableType GetConsumableType();
     public abstract string GetConsumableName();
     public abstract int GetPrice();
-	public abstract int GetPremiumCost();
 
     public void ResetTime()
     {

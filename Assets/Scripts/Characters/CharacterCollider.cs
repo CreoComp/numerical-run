@@ -107,14 +107,7 @@ public class CharacterCollider : MonoBehaviour
 			if (magnetCoins.Contains(c.gameObject))
 				magnetCoins.Remove(c.gameObject);
 
-			if (c.GetComponent<Coin>().isPremium)
-            {
-				Addressables.ReleaseInstance(c.gameObject);
-                PlayerData.instance.premium += 1;
-                controller.premium += 1;
-				m_Audio.PlayOneShot(premiumSound);
-			}
-            else
+			if (c.GetComponent<Coin>())
             {
 				Coin.coinPool.Free(c.gameObject);
                 PlayerData.instance.coins += 1;
@@ -167,7 +160,6 @@ public class CharacterCollider : MonoBehaviour
 				m_DeathData.themeUsed = controller.trackManager.currentTheme.themeName;
 				m_DeathData.obstacleType = ob.GetType().ToString();
 				m_DeathData.coins = controller.coins;
-				m_DeathData.premium = controller.premium;
 				m_DeathData.score = controller.trackManager.score;
 				m_DeathData.worldDistance = controller.trackManager.worldDistance;
 

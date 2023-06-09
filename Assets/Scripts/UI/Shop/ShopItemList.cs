@@ -40,16 +40,6 @@ public class ShopItemList : ShopList
                     itm.nameText.text = c.GetConsumableName();
                     itm.pricetext.text = c.GetPrice().ToString();
 
-                    if (c.GetPremiumCost() > 0)
-                    {
-                        itm.premiumText.transform.parent.gameObject.SetActive(true);
-                        itm.premiumText.text = c.GetPremiumCost().ToString();
-                    }
-                    else
-                    {
-                        itm.premiumText.transform.parent.gameObject.SetActive(false);
-                    }
-
                     itm.icon.sprite = c.icon;
 
                     itm.countText.gameObject.SetActive(true);
@@ -78,70 +68,13 @@ public class ShopItemList : ShopList
 			itemList.pricetext.color = Color.black;
 		}
 
-		if (c.GetPremiumCost() > PlayerData.instance.premium)
-		{
-			itemList.buyButton.interactable = false;
-			itemList.premiumText.color = Color.red;
-		}
-		else
-		{
-			itemList.premiumText.color = Color.black;
-		}
 	}
 
     public void Buy(Consumable c)
     {
         PlayerData.instance.coins -= c.GetPrice();
-		PlayerData.instance.premium -= c.GetPremiumCost();
 		PlayerData.instance.Add(c.GetConsumableType());
         PlayerData.instance.Save();
-
-#if UNITY_ANALYTICS // Using Analytics Standard Events v0.3.0
-        var transactionId = System.Guid.NewGuid().ToString();
-        var transactionContext = "store";
-        var level = PlayerData.instance.rank.ToString();
-        var itemId = c.GetConsumableName();
-        var itemType = "consumable";
-        var itemQty = 1;
-
-        AnalyticsEvent.ItemAcquired(
-            AcquisitionType.Soft,
-            transactionContext,
-            itemQty,
-            itemId,
-            itemType,
-            level,
-            transactionId
-        );
-
-        if (c.GetPrice() > 0)
-        {
-            AnalyticsEvent.ItemSpent(
-                AcquisitionType.Soft, // Currency type
-                transactionContext,
-                c.GetPrice(),
-                itemId,
-                PlayerData.instance.coins, // Balance
-                itemType,
-                level,
-                transactionId
-            );
-        }
-
-        if (c.GetPremiumCost() > 0)
-        {
-            AnalyticsEvent.ItemSpent(
-                AcquisitionType.Premium, // Currency type
-                transactionContext,
-                c.GetPremiumCost(),
-                itemId,
-                PlayerData.instance.premium, // Balance
-                itemType,
-                level,
-                transactionId
-            );
-        }
-#endif
 
         Refresh();
     }

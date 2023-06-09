@@ -27,13 +27,11 @@ public class GameState : AState
 
     [Header("UI")]
     public Text coinText;
-    public Text premiumText;
     public Text scoreText;
 	public Text distanceText;
     public Text multiplierText;
 	public Text countdownText;
     public RectTransform powerupZone;
-	public RectTransform lifeRectTransform;
 
 	public RectTransform pauseMenu;
 	public RectTransform wholeUI;
@@ -42,9 +40,6 @@ public class GameState : AState
     public Image inventoryIcon;
 
     public GameObject gameOverPopup;
-    public Button premiumForLifeButton;
-    public GameObject adsForLifeButton;
-    public Text premiumCurrencyOwned;
 
     [Header("Prefabs")]
     public GameObject PowerupIconPrefab;
@@ -58,24 +53,15 @@ public class GameState : AState
 
     public Modifier currentModifier = new Modifier();
 
-    public string adsPlacementId = "rewardedVideo";
-#if UNITY_ANALYTICS
-    public AdvertisingNetwork adsNetwork = AdvertisingNetwork.UnityAds;
-#endif
-    public bool adsRewarded = true;
-
     protected bool m_Finished;
     protected float m_TimeSinceStart;
     protected List<PowerupIcon> m_PowerupIcons = new List<PowerupIcon>();
-	protected Image[] m_LifeHearts;
 
     protected RectTransform m_CountdownRectTransform;
     protected bool m_WasMoving;
 
     protected bool m_AdsInitialised = false;
     protected bool m_GameoverSelectionDone = false;
-
-    protected int k_MaxLives = 3;
 
     protected bool m_IsTutorial; //Tutorial is a special run that don't chance section until the tutorial step is "validated".
     protected int m_TutorialClearedObstacle = 0;
@@ -89,11 +75,6 @@ public class GameState : AState
     {
         m_CountdownRectTransform = countdownText.GetComponent<RectTransform>();
 
-        m_LifeHearts = new Image[k_MaxLives];
-        for (int i = 0; i < k_MaxLives; ++i)
-        {
-            m_LifeHearts[i] = lifeRectTransform.GetChild(i).GetComponent<Image>();
-        }
 
         if (MusicPlayer.instance.GetStem(0) != gameTheme)
         {
@@ -131,7 +112,6 @@ public class GameState : AState
         if (!trackManager.isRerun)
         {
             m_TimeSinceStart = 0;
-            trackManager.characterController.currentLife = trackManager.characterController.maxLife;
         }
 
         currentModifier.OnRunStart(this);
@@ -185,24 +165,7 @@ public class GameState : AState
         if (m_Finished)
         {
             //if we are finished, we check if advertisement is ready, allow to disable the button until it is ready
-#if UNITY_ADS
-            if (!trackManager.isTutorial && !m_AdsInitialised && Advertisement.IsReady(adsPlacementId))
-            {
-                adsForLifeButton.SetActive(true);
-                m_AdsInitialised = true;
-#if UNITY_ANALYTICS
-                AnalyticsEvent.AdOffer(adsRewarded, adsNetwork, adsPlacementId, new Dictionary<string, object>
-            {
-                { "level_index", PlayerData.instance.rank },
-                { "distance", TrackManager.instance == null ? 0 : TrackManager.instance.worldDistance },
-            });
-#endif
-            }
-            else if(trackManager.isTutorial || !m_AdsInitialised)
-                adsForLifeButton.SetActive(false);
-#else
-            adsForLifeButton.SetActive(false); //Ads is disabled
-#endif
+            // + аналитика
 
             return;
         }
@@ -333,20 +296,6 @@ public class GameState : AState
     protected void UpdateUI()
     {
         coinText.text = trackManager.characterController.coins.ToString();
-        premiumText.text = trackManager.characterController.premium.ToString();
-
-		for (int i = 0; i < 3; ++i)
-		{
-
-			if(trackManager.characterController.currentLife > i)
-			{
-				m_LifeHearts[i].color = Color.white;
-			}
-			else
-			{
-				m_LifeHearts[i].color = Color.black;
-			}
-		}
 
         scoreText.text = trackManager.score.ToString();
         multiplierText.text = "x " + trackManager.multiplier;
@@ -407,10 +356,6 @@ public class GameState : AState
 
     public void OpenGameOverPopup()
     {
-        premiumForLifeButton.interactable = PlayerData.instance.premium >= 3;
-
-        premiumCurrencyOwned.text = PlayerData.instance.premium.ToString();
-
         ClearPowerup();
 
         gameOverPopup.SetActive(true);
@@ -421,7 +366,7 @@ public class GameState : AState
         manager.SwitchState("GameOver");
     }
 
-    public void PremiumForLife()
+    public void CoinsForLife()
     {
         //This check avoid a bug where the video AND premium button are released on the same frame.
         //It lead to the ads playing and then crashing the game as it try to start the second wind again.
@@ -431,13 +376,19 @@ public class GameState : AState
 
         m_GameoverSelectionDone = true;
 
-        PlayerData.instance.premium -= 3;
+        if(PlayerData.instance.coins >= 900)
+        {
+            Debug.Log(PlayerData.instance.coins + "coins");
+            PlayerData.instance.coins -= 900;
+            trackManager.characterController.coins -= Mathf.Min(trackManager.characterController.coins, 500);
+
+            SecondWind();
+        }
+
         //since premium are directly added to the PlayerData premium count, we also need to remove them from the current run premium count
         // (as if you had 0, grabbed 3 during that run, you can directly buy a new chance). But for the case where you add one in the playerdata
         // and grabbed 2 during that run, we don't want to remove 3, otherwise will have -1 premium for that run!
-        trackManager.characterController.premium -= Mathf.Min(trackManager.characterController.premium, 3);
 
-        SecondWind();
     }
 
     public void SecondWind()
@@ -454,62 +405,9 @@ public class GameState : AState
 
         m_GameoverSelectionDone = true;
 
-#if UNITY_ADS
-        if (Advertisement.IsReady(adsPlacementId))
-        {
-#if UNITY_ANALYTICS
-            AnalyticsEvent.AdStart(adsRewarded, adsNetwork, adsPlacementId, new Dictionary<string, object>
-            {
-                { "level_index", PlayerData.instance.rank },
-                { "distance", TrackManager.instance == null ? 0 : TrackManager.instance.worldDistance },
-            });
-#endif
-            var options = new ShowOptions { resultCallback = HandleShowResult };
-            Advertisement.Show(adsPlacementId, options);
-        }
-        else
-        {
-#if UNITY_ANALYTICS
-            AnalyticsEvent.AdSkip(adsRewarded, adsNetwork, adsPlacementId, new Dictionary<string, object> {
-                { "error", Advertisement.GetPlacementState(adsPlacementId).ToString() }
-            });
-#endif
-        }
-#else
+
 		GameOver();
-#endif
     }
-
-    //=== AD
-#if UNITY_ADS
-
-    private void HandleShowResult(ShowResult result)
-    {
-        switch (result)
-        {
-            case ShowResult.Finished:
-#if UNITY_ANALYTICS
-                AnalyticsEvent.AdComplete(adsRewarded, adsNetwork, adsPlacementId);
-#endif
-                SecondWind();
-                break;
-            case ShowResult.Skipped:
-                Debug.Log("The ad was skipped before reaching the end.");
-#if UNITY_ANALYTICS
-                AnalyticsEvent.AdSkip(adsRewarded, adsNetwork, adsPlacementId);
-#endif
-                break;
-            case ShowResult.Failed:
-                Debug.LogError("The ad failed to be shown.");
-#if UNITY_ANALYTICS
-                AnalyticsEvent.AdSkip(adsRewarded, adsNetwork, adsPlacementId, new Dictionary<string, object> {
-                    { "error", "failed" }
-                });
-#endif
-                break;
-        }
-    }
-#endif
 
 
     void TutorialCheckObstacleClear()
