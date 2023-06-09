@@ -70,15 +70,6 @@ public class ShopCharacterList : ShopList
 			itm.pricetext.color = Color.black;
 		}
 
-		if (c.premiumCost > PlayerData.instance.premium)
-		{
-			itm.buyButton.interactable = false;
-			itm.premiumText.color = Color.red;
-		}
-		else
-		{
-			itm.premiumText.color = Color.black;
-		}
 
 		if (PlayerData.instance.characters.Contains(c.characterName))
 		{
@@ -93,56 +84,8 @@ public class ShopCharacterList : ShopList
 	public void Buy(Character c)
     {
         PlayerData.instance.coins -= c.cost;
-		PlayerData.instance.premium -= c.premiumCost;
         PlayerData.instance.AddCharacter(c.characterName);
         PlayerData.instance.Save();
-
-#if UNITY_ANALYTICS // Using Analytics Standard Events v0.3.0
-        var transactionId = System.Guid.NewGuid().ToString();
-        var transactionContext = "store";
-        var level = PlayerData.instance.rank.ToString();
-        var itemId = c.characterName;
-        var itemType = "non_consumable";
-        var itemQty = 1;
-
-        AnalyticsEvent.ItemAcquired(
-            AcquisitionType.Soft,
-            transactionContext,
-            itemQty,
-            itemId,
-            itemType,
-            level,
-            transactionId
-        );
-        
-        if (c.cost > 0)
-        {
-            AnalyticsEvent.ItemSpent(
-                AcquisitionType.Soft, // Currency type
-                transactionContext,
-                c.cost,
-                itemId,
-                PlayerData.instance.coins, // Balance
-                itemType,
-                level,
-                transactionId
-            );
-        }
-
-        if (c.premiumCost > 0)
-        {
-            AnalyticsEvent.ItemSpent(
-                AcquisitionType.Premium, // Currency type
-                transactionContext,
-                c.premiumCost,
-                itemId,
-                PlayerData.instance.premium, // Balance
-                itemType,
-                level,
-                transactionId
-            );
-        }
-#endif
 
         // Repopulate to change button accordingly.
         Populate();

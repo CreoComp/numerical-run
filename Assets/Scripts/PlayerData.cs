@@ -33,7 +33,6 @@ public class PlayerData
 
 
     public int coins;
-    public int premium;
     public Dictionary<Consumable.ConsumableType, int> consumables = new Dictionary<Consumable.ConsumableType, int>();   // Inventory of owned consumables and quantity.
 
     public List<string> characters = new List<string>();    // Inventory of characters owned.
@@ -151,7 +150,7 @@ public class PlayerData
 
     public void ClaimMission(MissionBase mission)
     {        
-        premium += mission.reward;
+        coins += mission.reward;
         
 #if UNITY_ANALYTICS // Using Analytics Standard Events v0.3.0
         AnalyticsEvent.ItemAcquired(
@@ -242,7 +241,6 @@ public class PlayerData
 		m_Instance.usedAccessory = -1;
 
         m_Instance.coins = 0;
-        m_Instance.premium = 0;
 
 		m_Instance.characters.Add("Trash Cat");
 		m_Instance.themes.Add("Day");
@@ -257,8 +255,7 @@ public class PlayerData
 
     public void Read()
     {
-        BinaryReader r = new BinaryReader(new FileStream(saveFile, FileMode.Open));
-
+            BinaryReader r = new BinaryReader(new FileStream(saveFile, FileMode.Open));
         int ver = r.ReadInt32();
 
 		if(ver < 6)
@@ -315,11 +312,6 @@ public class PlayerData
         usedTheme = r.ReadInt32();
 
         // Save contains the version they were written with. If data are added bump the version & test for that version before loading that data.
-        if(ver >= 2)
-        {
-            premium = r.ReadInt32();
-        }
-
         // Added highscores.
 		if(ver >= 3)
 		{
@@ -424,7 +416,6 @@ public class PlayerData
         }
 
         w.Write(usedTheme);
-        w.Write(premium);
 
 		// Write highscores.
 		w.Write(highscores.Count);
@@ -476,11 +467,10 @@ public class PlayerDataEditor : Editor
     static public void GiveCoins()
     {
         PlayerData.instance.coins += 1000000;
-		PlayerData.instance.premium += 1000;
         PlayerData.instance.Save();
     }
 
-    [MenuItem("Trash Dash Debug/Give 10 Consumables of each types")]
+    [MenuItem("Trash Dash Debug/Give 9 Consumables of each types")]
     static public void AddConsumables()
     {
        
@@ -489,7 +479,7 @@ public class PlayerDataEditor : Editor
             Consumable c = ConsumableDatabase.GetConsumbale(ShopItemList.s_ConsumablesTypes[i]);
             if(c != null)
             {
-                PlayerData.instance.consumables[c.GetConsumableType()] = 10;
+                PlayerData.instance.consumables[c.GetConsumableType()] = 9;
             }
         }
 

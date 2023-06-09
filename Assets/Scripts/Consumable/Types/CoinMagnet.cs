@@ -21,11 +21,6 @@ public class CoinMagnet : Consumable
         return 750;
     }
 
-	public override int GetPremiumCost()
-	{
-		return 0;
-	}
-
 	protected Collider[] returnColls = new Collider[20];
 
 	public override void Tick(CharacterInputController c)
@@ -38,7 +33,7 @@ public class CoinMagnet : Consumable
         {
 			Coin returnCoin = returnColls[i].GetComponent<Coin>();
 
-			if (returnCoin != null && !returnCoin.isPremium && !c.characterCollider.magnetCoins.Contains(returnCoin.gameObject))
+			if (returnCoin != null && returnCoin && !c.characterCollider.magnetCoins.Contains(returnCoin.gameObject))
 			{
 				returnColls[i].transform.SetParent(c.transform);
 				c.characterCollider.magnetCoins.Add(returnColls[i].gameObject);
