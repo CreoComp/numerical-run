@@ -5,7 +5,6 @@ public class CoinMagnet : Consumable
 {
     protected readonly Vector3 k_HalfExtentsBox = new Vector3 (20.0f, 1.0f, 1.0f);
     protected const int k_LayerMask = 1 << 8;
-
     public override string GetConsumableName()
     {
         return "Magnet";

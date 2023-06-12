@@ -39,15 +39,6 @@ public class ShopCharacterList : ShopList
 
                     itm.buyButton.image.sprite = itm.buyButtonSprite;
 
-                    if (c.premiumCost > 0)
-                    {
-                        itm.premiumText.transform.parent.gameObject.SetActive(true);
-                        itm.premiumText.text = c.premiumCost.ToString();
-                    }
-                    else
-                    {
-                        itm.premiumText.transform.parent.gameObject.SetActive(false);
-                    }
 
                     itm.buyButton.onClick.AddListener(delegate() { Buy(c); });
 

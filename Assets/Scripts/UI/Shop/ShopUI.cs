@@ -16,7 +16,7 @@ public class ShopUI : MonoBehaviour
     public ShopItemList itemList;
     public ShopCharacterList characterList;
     public ShopAccessoriesList accessoriesList;
-    public ShopThemeList themeList;
+    public ShopConsumbleUpgradeList ShopConsumbleUpgradeList;
 
     [Header("UI")]
     public Text coinCounter;
@@ -69,8 +69,8 @@ public class ShopUI : MonoBehaviour
     public void OpenThemeList()
     {
         m_OpenList.Close();
-        themeList.Open();
-        m_OpenList = themeList;
+        ShopConsumbleUpgradeList.Open();
+        m_OpenList = ShopConsumbleUpgradeList;
     }
 
     public void OpenAccessoriesList()

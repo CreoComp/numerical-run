@@ -30,7 +30,7 @@ public class CharacterInputController : MonoBehaviour
 
 	[Header("Controls")]
 	public float jumpLength = 2.0f;     // Distance jumped
-	public float jumpHeight = 1.2f;
+	public float jumpHeight = 2f;
 
 	public float slideLength = 2.0f;
 

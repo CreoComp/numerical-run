@@ -1,12 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.AddressableAssets;
+using Unity.VisualScripting;
 
 /// <summary>
 /// Defines a consumable (called "power up" in game). Each consumable is derived from this and implements its functions.
 /// </summary>
 public abstract class Consumable : MonoBehaviour
 {
+    public int index;
     public float duration;
 
     public enum ConsumableType
@@ -39,6 +41,10 @@ public abstract class Consumable : MonoBehaviour
     public abstract string GetConsumableName();
     public abstract int GetPrice();
 
+    CharacterInputController C;
+
+
+    
     public void ResetTime()
     {
         m_SinceStart = 0;
@@ -52,6 +58,7 @@ public abstract class Consumable : MonoBehaviour
 
     public virtual IEnumerator Started(CharacterInputController c)
     {
+        C = c;
         m_SinceStart = 0;
 
 		if (activatedSound != null)
@@ -67,7 +74,7 @@ public abstract class Consumable : MonoBehaviour
             yield return op;
             m_ParticleSpawned = op.Result.GetComponent<ParticleSystem>();
             if (!m_ParticleSpawned.main.loop)
-                StartCoroutine(TimedRelease(m_ParticleSpawned.gameObject, m_ParticleSpawned.main.duration));
+                StartCoroutine(TimedRelease(m_ParticleSpawned.gameObject, duration));
 
             m_ParticleSpawned.transform.SetParent(c.characterCollider.transform);
             m_ParticleSpawned.transform.localPosition = op.Result.transform.position;
@@ -86,6 +93,7 @@ public abstract class Consumable : MonoBehaviour
         m_SinceStart += Time.deltaTime;
         if (m_SinceStart >= duration)
         {
+            Ended(C);
             m_Active = false;
             return;
         }
@@ -110,5 +118,9 @@ public abstract class Consumable : MonoBehaviour
                 c.powerupSource.Play();
             }
         }
+    }
+    private void Start()
+    {
+        duration = BoosterUpgrade.Instance.boosters[index].duration[BoosterUpgrade.Instance.boosters[index].nowLevel];
     }
 }

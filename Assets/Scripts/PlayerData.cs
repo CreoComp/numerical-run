@@ -379,6 +379,17 @@ public class PlayerData
         r.Close();
     }
 
+    public void AddCoins(int amount)
+    {
+        if(isValidTransaction(amount))
+        {
+            coins += amount;
+        }
+        Save();
+    }
+
+     public bool isValidTransaction(int amount) =>
+        coins + amount >= 0;
     public void Save()
     {
         BinaryWriter w = new BinaryWriter(new FileStream(saveFile, FileMode.OpenOrCreate));
