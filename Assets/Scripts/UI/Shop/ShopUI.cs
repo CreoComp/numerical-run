@@ -26,8 +26,14 @@ public class ShopUI : MonoBehaviour
 
     protected const int k_CheatCoins = 1000000;
 
+    public void UpgradeConsumble(int index)
+    {
+        BoosterUpgrade.Instance.UpgradeBooster(index);
+    }
+
 	void Start ()
     {
+
         PlayerData.Create();
 
         consumableDatabase.Load();

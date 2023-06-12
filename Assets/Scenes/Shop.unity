@@ -6165,9 +6165,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 904275850}
-        m_TargetAssemblyTypeName: BoosterUpgrade, Assembly-CSharp
-        m_MethodName: UpgradeBooster
+      - m_Target: {fileID: 1425020435}
+        m_TargetAssemblyTypeName: ShopUI, Assembly-CSharp
+        m_MethodName: UpgradeConsumble
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7026,9 +7026,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 904275850}
-        m_TargetAssemblyTypeName: BoosterUpgrade, Assembly-CSharp
-        m_MethodName: UpgradeBooster
+      - m_Target: {fileID: 1425020435}
+        m_TargetAssemblyTypeName: ShopUI, Assembly-CSharp
+        m_MethodName: UpgradeConsumble
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7291,9 +7291,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 904275850}
-        m_TargetAssemblyTypeName: BoosterUpgrade, Assembly-CSharp
-        m_MethodName: UpgradeBooster
+      - m_Target: {fileID: 1425020435}
+        m_TargetAssemblyTypeName: ShopUI, Assembly-CSharp
+        m_MethodName: UpgradeConsumble
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

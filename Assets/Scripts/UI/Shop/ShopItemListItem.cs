@@ -29,12 +29,16 @@ public class ShopItemListItem : MonoBehaviour
     }
     private void Start()
     {
-        if (Application.systemLanguage == SystemLanguage.Russian)
-            Level.text = "Уровень " + (BoosterUpgrade.Instance.boosters[index].nowLevel + 1);
-        else
-            Level.text = "Level " + (BoosterUpgrade.Instance.boosters[index].nowLevel + 1);
+        if (Level != null)
+        {
+            if (Application.systemLanguage == SystemLanguage.Russian)
+                Level.text = "Уровень " + (BoosterUpgrade.Instance.boosters[index].nowLevel + 1);
+            else
+                Level.text = "Level " + (BoosterUpgrade.Instance.boosters[index].nowLevel + 1);
 
-        pricetext.text = BoosterUpgrade.Instance.boosters[index].cost[BoosterUpgrade.Instance.boosters[index].nowLevel] + "";
+        }
+            pricetext.text = BoosterUpgrade.Instance.boosters[index].cost[BoosterUpgrade.Instance.boosters[index].nowLevel] + "";
+        
     }
     void UpgradeConsumble(int INDEX, int nowLevel, int cost)
     {
