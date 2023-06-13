@@ -58,7 +58,7 @@ public class ShopItemList : ShopList
 		PlayerData.instance.consumables.TryGetValue(c.GetConsumableType(), out count);
 		itemList.countText.text = count.ToString();
 
-		if (c.GetPrice() > PlayerData.instance.coins)
+		if (PlayerData.instance.isValidTransaction(-c.GetPrice()))
 		{
 			itemList.buyButton.interactable = false;
 			itemList.pricetext.color = Color.red;
@@ -72,10 +72,9 @@ public class ShopItemList : ShopList
 
     public void Buy(Consumable c)
     {
-        PlayerData.instance.coins -= c.GetPrice();
+        PlayerData.instance.AddCoins(-c.GetPrice());
 		PlayerData.instance.Add(c.GetConsumableType());
-        PlayerData.instance.Save();
 
-        Refresh();
+		Refresh();
     }
 }

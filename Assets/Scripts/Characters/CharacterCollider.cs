@@ -110,8 +110,8 @@ public class CharacterCollider : MonoBehaviour
 			if (c.GetComponent<Coin>())
             {
 				Coin.coinPool.Free(c.gameObject);
-                PlayerData.instance.coins += 1;
-				controller.coins += 1;
+                //PlayerData.instance.coins += 1;
+				controller.Numbers += 1;
 				m_Audio.PlayOneShot(coinSound);
             }
         }
@@ -159,7 +159,7 @@ public class CharacterCollider : MonoBehaviour
 				m_DeathData.character = controller.character.characterName;
 				m_DeathData.themeUsed = controller.trackManager.currentTheme.themeName;
 				m_DeathData.obstacleType = ob.GetType().ToString();
-				m_DeathData.coins = controller.coins;
+				m_DeathData.coins = controller.Numbers;
 				m_DeathData.score = controller.trackManager.score;
 				m_DeathData.worldDistance = controller.trackManager.worldDistance;
 

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 #if UNITY_ANALYTICS
 using UnityEngine.Analytics;
@@ -21,6 +22,8 @@ public class GameOverState : AState
 
     public GameObject addButton;
 
+    public static Action MoneyConversion;
+
     public override void Enter(AState from)
     {
         canvas.gameObject.SetActive(true);
@@ -35,6 +38,8 @@ public class GameOverState : AState
         else
             missionPopup.gameObject.SetActive(false);
 
+        MoneyConversion?.Invoke();
+        
 		CreditCoins();
 
 		if (MusicPlayer.instance.GetStem(0) != gameOverTheme)
@@ -91,41 +96,6 @@ public class GameOverState : AState
     protected void CreditCoins()
 	{
 		PlayerData.instance.Save();
-
-#if UNITY_ANALYTICS // Using Analytics Standard Events v0.3.0
-        var transactionId = System.Guid.NewGuid().ToString();
-        var transactionContext = "gameplay";
-        var level = PlayerData.instance.rank.ToString();
-        var itemType = "consumable";
-        
-        if (trackManager.characterController.coins > 0)
-        {
-            AnalyticsEvent.ItemAcquired(
-                AcquisitionType.Soft, // Currency type
-                transactionContext,
-                trackManager.characterController.coins,
-                "fishbone",
-                PlayerData.instance.coins,
-                itemType,
-                level,
-                transactionId
-            );
-        }
-
-        if (trackManager.characterController.premium > 0)
-        {
-            AnalyticsEvent.ItemAcquired(
-                AcquisitionType.Premium, // Currency type
-                transactionContext,
-                trackManager.characterController.premium,
-                "anchovies",
-                PlayerData.instance.premium,
-                itemType,
-                level,
-                transactionId
-            );
-        }
-#endif 
 	}
 
 	protected void FinishRun()
@@ -143,17 +113,6 @@ public class GameOverState : AState
 
         CharacterCollider.DeathEvent de = trackManager.characterController.characterCollider.deathData;
         //register data to analytics
-#if UNITY_ANALYTICS
-        AnalyticsEvent.GameOver(null, new Dictionary<string, object> {
-            { "coins", de.coins },
-            { "premium", de.premium },
-            { "score", de.score },
-            { "distance", de.worldDistance },
-            { "obstacle",  de.obstacleType },
-            { "theme", de.themeUsed },
-            { "character", de.character },
-        });
-#endif
 
         PlayerData.instance.Save();
 

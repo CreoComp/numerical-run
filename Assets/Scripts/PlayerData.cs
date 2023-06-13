@@ -32,7 +32,7 @@ public class PlayerData
     protected string saveFile = "";
 
 
-    public int coins;
+    public int Coins;
     public Dictionary<Consumable.ConsumableType, int> consumables = new Dictionary<Consumable.ConsumableType, int>();   // Inventory of owned consumables and quantity.
 
     public List<string> characters = new List<string>();    // Inventory of characters owned.
@@ -150,7 +150,7 @@ public class PlayerData
 
     public void ClaimMission(MissionBase mission)
     {        
-        coins += mission.reward;
+        AddCoins(mission.reward);
         
 #if UNITY_ANALYTICS // Using Analytics Standard Events v0.3.0
         AnalyticsEvent.ItemAcquired(
@@ -240,7 +240,7 @@ public class PlayerData
 		m_Instance.usedTheme = 0;
 		m_Instance.usedAccessory = -1;
 
-        m_Instance.coins = 0;
+        m_Instance.Coins = 0;
 
 		m_Instance.characters.Add("Trash Cat");
 		m_Instance.themes.Add("Day");
@@ -267,7 +267,7 @@ public class PlayerData
 			ver = r.ReadInt32();
 		}
 
-        coins = r.ReadInt32();
+        Coins = r.ReadInt32();
 
         consumables.Clear();
         int consumableCount = r.ReadInt32();
@@ -383,19 +383,19 @@ public class PlayerData
     {
         if(isValidTransaction(amount))
         {
-            coins += amount;
+            Coins += amount;
         }
         Save();
     }
 
      public bool isValidTransaction(int amount) =>
-        coins + amount >= 0;
+        Coins + amount >= 0;
     public void Save()
     {
         BinaryWriter w = new BinaryWriter(new FileStream(saveFile, FileMode.OpenOrCreate));
 
         w.Write(s_Version);
-        w.Write(coins);
+        w.Write(Coins);
 
         w.Write(consumables.Count);
         foreach(KeyValuePair<Consumable.ConsumableType, int> p in consumables)
@@ -477,7 +477,7 @@ public class PlayerDataEditor : Editor
     [MenuItem("Trash Dash Debug/Give 1000000 fishbones and 1000 premium")]
     static public void GiveCoins()
     {
-        PlayerData.instance.coins += 1000000;
+        PlayerData.instance.Coins += 1000000;
         PlayerData.instance.Save();
     }
 
