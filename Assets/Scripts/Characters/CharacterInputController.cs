@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.AddressableAssets;
 
@@ -22,7 +23,14 @@ public class CharacterInputController : MonoBehaviour
 
 	public Consumable inventory;
 
-	public int coins { get { return m_Coins; } set { m_Coins = value; } }
+	public int Numbers { get { return m_Coins; }
+		set
+		{
+			m_Coins = value;
+			NumbersCountChanged?.Invoke(m_Coins);
+		} }
+
+	public static Action<int> NumbersCountChanged;
 	public int currentLife { get { return m_CurrentLife; } set { m_CurrentLife = value; } }
 	public List<Consumable> consumables { get { return m_ActiveConsumables; } }
 	public bool isJumping { get { return m_Jumping; } }
@@ -77,6 +85,23 @@ public class CharacterInputController : MonoBehaviour
         m_Sliding = false;
         m_SlideStart = 0.0f;
 	    m_IsRunning = false;
+    }
+
+    protected void OnEnable()
+    {
+	    GameOverState.MoneyConversion += MoneyConversion;
+    }
+
+    protected void OnDisable()
+    {
+	    GameOverState.MoneyConversion -= MoneyConversion;
+    }
+
+    private void MoneyConversion()
+    {
+	    int result = (Numbers-(Numbers % 10))/10;
+		PlayerData.instance.AddCoins(result);
+		Numbers = 0;
     }
 
 #if !UNITY_STANDALONE
@@ -175,19 +200,19 @@ public class CharacterInputController : MonoBehaviour
         // Use key input in editor or standalone
         // disabled if it's tutorial and not thecurrent right tutorial level (see func TutorialMoveCheck)
 
-        if (Input.GetKeyDown(KeyCode.LeftArrow) && TutorialMoveCheck(0))
+        if ((Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow)) && TutorialMoveCheck(0))
         {
             ChangeLane(-1);
         }
-        else if(Input.GetKeyDown(KeyCode.RightArrow) && TutorialMoveCheck(0))
+        else if((Input.GetKeyDown(KeyCode.D)|| Input.GetKeyDown(KeyCode.RightArrow)) && TutorialMoveCheck(0))
         {
             ChangeLane(1);
         }
-        else if(Input.GetKeyDown(KeyCode.UpArrow) && TutorialMoveCheck(1))
+        else if((Input.GetKeyDown(KeyCode.W)|| Input.GetKeyDown(KeyCode.UpArrow)) && TutorialMoveCheck(1))
         {
             Jump();
         }
-		else if (Input.GetKeyDown(KeyCode.DownArrow) && TutorialMoveCheck(2))
+		else if ((Input.GetKeyDown(KeyCode.S)|| Input.GetKeyDown(KeyCode.DownArrow)) && TutorialMoveCheck(2))
 		{
 			if(!m_Sliding)
 				Slide();

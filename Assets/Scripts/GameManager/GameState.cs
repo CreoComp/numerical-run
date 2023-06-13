@@ -180,7 +180,7 @@ public class GameState : AState
             {
                 pauseButton.gameObject.SetActive(false);
                 chrCtrl.CleanConsumable();
-                chrCtrl.character.animator.SetBool(s_DeadHash, true);
+                chrCtrl.character.animator.SetBool("Dead", true);
                 chrCtrl.characterCollider.koParticle.gameObject.SetActive(true);
                 StartCoroutine(WaitForGameOver());
             }
@@ -295,7 +295,7 @@ public class GameState : AState
 
     protected void UpdateUI()
     {
-        coinText.text = trackManager.characterController.coins.ToString();
+        coinText.text = PlayerData.instance.Coins.ToString();
 
         scoreText.text = trackManager.score.ToString();
         multiplierText.text = "x " + trackManager.multiplier;
@@ -376,11 +376,10 @@ public class GameState : AState
 
         m_GameoverSelectionDone = true;
 
-        if(PlayerData.instance.coins >= 900)
+        if(PlayerData.instance.isValidTransaction(-900))
         {
-            Debug.Log(PlayerData.instance.coins + "coins");
-            PlayerData.instance.coins -= 900;
-            trackManager.characterController.coins -= Mathf.Min(trackManager.characterController.coins, 500);
+            PlayerData.instance.AddCoins(-900);
+            //trackManager.characterController.coins -= Mathf.Min(trackManager.characterController.coins, 500);
 
             SecondWind();
         }

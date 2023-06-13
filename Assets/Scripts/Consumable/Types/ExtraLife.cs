@@ -33,7 +33,7 @@ public class ExtraLife : Consumable
         yield return base.Started(c);
         if (c.currentLife < k_MaxLives)
             c.currentLife += 1;
-		else
-            c.coins += k_CoinValue;
+		//else
+            //c.coins += k_CoinValue;
     }
 }

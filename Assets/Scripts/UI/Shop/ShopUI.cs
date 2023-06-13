@@ -55,7 +55,7 @@ public class ShopUI : MonoBehaviour
 	
 	void Update ()
     {
-        coinCounter.text = PlayerData.instance.coins.ToString();
+        coinCounter.text = PlayerData.instance.Coins.ToString();
     }
 
     public void OpenItemList()
@@ -107,8 +107,7 @@ public class ShopUI : MonoBehaviour
         return ; //you can't cheat in production build
 #endif
 
-        PlayerData.instance.coins += k_CheatCoins;
-		PlayerData.instance.Save();
+        PlayerData.instance.AddCoins(-k_CheatCoins);
 	}
 
 }

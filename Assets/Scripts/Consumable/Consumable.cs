@@ -129,8 +129,4 @@ public abstract class Consumable : MonoBehaviour
             }
         }
     }
-    private void Start()
-    {
-        duration = BoosterUpgrade.Instance.boosters[index].duration[BoosterUpgrade.Instance.boosters[index].nowLevel];
-    }
 }
