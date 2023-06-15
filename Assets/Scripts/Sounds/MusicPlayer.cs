@@ -20,6 +20,7 @@ public class MusicPlayer : MonoBehaviour
 
     void Awake()
     {
+        
         if (s_Instance != null)
         {
             Destroy(gameObject);
@@ -37,6 +38,7 @@ public class MusicPlayer : MonoBehaviour
 
 	void Start()
 	{
+
 		PlayerData.Create ();
 
 		if (PlayerData.instance.masterVolume > float.MinValue) 
@@ -53,7 +55,7 @@ public class MusicPlayer : MonoBehaviour
 
 			PlayerData.instance.Save ();
 		}
-
+        PlayerData.instance.CountOpenGame ++;
 		StartCoroutine(RestartAllStems());
 	}
 

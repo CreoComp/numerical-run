@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.IO;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 #if UNITY_ANALYTICS
 using UnityEngine.Analytics;
 #endif
@@ -47,7 +48,23 @@ public class PlayerData
 	public string previousName = "Trash Cat";
 
     public bool licenceAccepted;
-    public bool tutorialDone;
+    public bool tutorialDone = true;
+
+
+    int CountGames;
+    public int CountOpenGame
+    {
+        get
+        {
+            return CountGames;
+        }
+        set
+        {
+            CountGames = value;
+            Save();
+            AnalyticsManager.StartGame();
+        }
+    }
 
 	public float masterVolume = float.MinValue, musicVolume = float.MinValue, masterSFXVolume = float.MinValue;
 
@@ -151,6 +168,7 @@ public class PlayerData
     public void ClaimMission(MissionBase mission)
     {        
         AddCoins(mission.reward);
+        AnalyticsManager.CompleteMission();
         
 #if UNITY_ANALYTICS // Using Analytics Standard Events v0.3.0
         AnalyticsEvent.ItemAcquired(
@@ -375,6 +393,7 @@ public class PlayerData
         {
             tutorialDone = r.ReadBoolean();
         }
+        CountGames = r.ReadInt32();
 
         r.Close();
     }
@@ -457,6 +476,7 @@ public class PlayerData
         w.Write(rank);
 
         w.Write(tutorialDone);
+        w.Write(CountGames);
 
         w.Close();
     }
