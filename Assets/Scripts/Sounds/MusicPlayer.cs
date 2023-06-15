@@ -20,6 +20,7 @@ public class MusicPlayer : MonoBehaviour
 
     void Awake()
     {
+        
         if (s_Instance != null)
         {
             Destroy(gameObject);
@@ -29,7 +30,7 @@ public class MusicPlayer : MonoBehaviour
         s_Instance = this;
 
         // As this is one of the first script executed, set that here.
-        Application.targetFrameRate = 30;
+        Application.targetFrameRate = 90;
         AudioListener.pause = false;
         
         DontDestroyOnLoad(gameObject);
@@ -37,6 +38,7 @@ public class MusicPlayer : MonoBehaviour
 
 	void Start()
 	{
+
 		PlayerData.Create ();
 
 		if (PlayerData.instance.masterVolume > float.MinValue) 
@@ -53,7 +55,7 @@ public class MusicPlayer : MonoBehaviour
 
 			PlayerData.instance.Save ();
 		}
-
+        PlayerData.instance.CountOpenGame ++;
 		StartCoroutine(RestartAllStems());
 	}
 
