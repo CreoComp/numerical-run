@@ -72,8 +72,13 @@ public class ShopItemList : ShopList
 
     public void Buy(Consumable c)
     {
-        PlayerData.instance.AddCoins(-c.GetPrice());
-		PlayerData.instance.Add(c.GetConsumableType());
+	    int amountToPay = -c.GetPrice();
+	    Debug.LogWarning(PlayerData.instance.isValidTransaction(amountToPay) + amountToPay.ToString());
+	    if (PlayerData.instance.isValidTransaction(amountToPay))
+	    {
+	        PlayerData.instance.AddCoins(amountToPay);
+			PlayerData.instance.Add(c.GetConsumableType());
+	    }
 
 		Refresh();
     }
