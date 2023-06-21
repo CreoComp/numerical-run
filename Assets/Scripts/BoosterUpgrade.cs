@@ -10,6 +10,7 @@ using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 public class BoosterUpgrade : MonoBehaviour
 {
     public static Action Upgrade;
+    public static Action<float, int> UpgradeConsumableDuration;
     public static Action<int, int, int> UpgradeUI;
 
     public List<Boosters> boosters = new List<Boosters>();
@@ -45,8 +46,7 @@ public class BoosterUpgrade : MonoBehaviour
             consumble.nowLevel++; 
 
             Upgrade?.Invoke();
-
-            if(consumble.nowLevel <= consumble.cost.Count - 1)
+            if (consumble.nowLevel <= consumble.cost.Count - 1)
             UpgradeUI?.Invoke(consumble.index + 1, consumble.nowLevel, consumble.cost[consumble.nowLevel]);
         }
 

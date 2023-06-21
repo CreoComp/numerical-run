@@ -4,6 +4,21 @@ using System.Collections;
 
 public class Invincibility : Consumable
 {
+    private void OnEnable()
+    {
+        BoosterUpgrade.UpgradeConsumableDuration += ChangeDura;
+    }
+    private void OnDisable()
+    {
+        BoosterUpgrade.UpgradeConsumableDuration -= ChangeDura;
+
+    }
+
+    void ChangeDura(float dura, int _index)
+    {
+        if (_index == 3)
+            duration = dura;
+    }
     public override string GetConsumableName()
     {
         return "Invincible";

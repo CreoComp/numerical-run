@@ -4,6 +4,21 @@ using System.Collections;
 
 public class Score2Multiplier : Consumable
 {
+    private void OnEnable()
+    {
+        BoosterUpgrade.UpgradeConsumableDuration += ChangeDura;
+    }
+    private void OnDisable()
+    {
+        BoosterUpgrade.UpgradeConsumableDuration -= ChangeDura;
+
+    }
+
+    void ChangeDura(float dura, int _index)
+    {
+        if(_index == 2)
+        duration = dura;
+    }
     public override string GetConsumableName()
     {
         return "x2";

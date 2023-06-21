@@ -9,17 +9,7 @@ using Unity.VisualScripting;
 public abstract class Consumable : MonoBehaviour
 {
     public int index;
-    public float duration
-    {
-        get
-        {
-            return BoosterUpgrade.Instance.boosters[index].duration[BoosterUpgrade.Instance.boosters[index].nowLevel];
-        }
-        set
-        {
-            duration = value;
-        }
-    }
+    public float duration;
 
     public enum ConsumableType
     {
@@ -53,8 +43,11 @@ public abstract class Consumable : MonoBehaviour
 
     CharacterInputController C;
 
-
-    
+    private void Awake()
+    {
+        Boosters consumble = BoosterUpgrade.Instance.boosters[index];
+        duration = consumble.duration[consumble.nowLevel];
+    }
     public void ResetTime()
     {
         m_SinceStart = 0;
@@ -129,4 +122,5 @@ public abstract class Consumable : MonoBehaviour
             }
         }
     }
+
 }
