@@ -505,7 +505,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28fd78937280ffb4fb7c90d8776c201c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  index: 1
+  index: 2
   icon: {fileID: 842952203}
   nameText: {fileID: 341153887}
   pricetext: {fileID: 139695808}
@@ -2903,7 +2903,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28fd78937280ffb4fb7c90d8776c201c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  index: 2
+  index: 3
   icon: {fileID: 222654095}
   nameText: {fileID: 1289610376}
   pricetext: {fileID: 2111002173}
@@ -6323,7 +6323,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28fd78937280ffb4fb7c90d8776c201c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  index: 0
+  index: 1
   icon: {fileID: 1520202132}
   nameText: {fileID: 1520293048}
   pricetext: {fileID: 1520235520}

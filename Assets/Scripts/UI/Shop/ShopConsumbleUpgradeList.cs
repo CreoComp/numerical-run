@@ -8,6 +8,15 @@ using UnityEngine.Analytics;
 
 public class ShopConsumbleUpgradeList : ShopList
 {
+    private void OnEnable()
+    {
+        BoosterUpgrade.Upgrade += Populate;
+    }
+    private void OnDisable()
+    {
+        BoosterUpgrade.Upgrade -= Populate;
+
+    }
     public override void Populate()
     {
         m_RefreshCallback = null;
@@ -22,31 +31,36 @@ public class ShopConsumbleUpgradeList : ShopList
 
     protected void RefreshButton(ShopItemListItem itm)
 	{
-		Boosters consumble = BoosterUpgrade.Instance.boosters[itm.index];
-
-		itm.pricetext.text = consumble.cost[consumble.nowLevel] + "";
+		Boosters consumble = BoosterUpgrade.Instance.boosters[itm.index - 1];
 
 
-        if (!PlayerData.instance.isValidTransaction(consumble.cost[consumble.nowLevel]))
+
+
+		if (consumble.nowLevel >= consumble.cost.Count)
 		{
-			itm.buyButton.interactable = false;
-			itm.pricetext.color = Color.red;
+
+            itm.buyButton.interactable = false;
+			itm.buyButton.image.sprite = itm.disabledButtonSprite;
+			itm.buyButton.transform.GetChild(0).GetComponent<UnityEngine.UI.Text>().text = "Max Level";
+            itm.pricetext.text = "";
+
+            return;
 		}
 		else
 		{
-			itm.pricetext.color = Color.black;
-		}
+            itm.pricetext.text = consumble.cost[consumble.nowLevel] + "";
 
-		if (consumble.nowLevel >= consumble.cost.Count - 1)
-		{
-			itm.buyButton.interactable = false;
-			itm.buyButton.image.sprite = itm.disabledButtonSprite;
-			itm.buyButton.transform.GetChild(0).GetComponent<UnityEngine.UI.Text>().text = "Max Level";
-		}
-	}
 
-    void Buy(ShopItemListItem itm)
-    {
-        BoosterUpgrade.Instance.UpgradeBooster(itm.index);
+            if (!PlayerData.instance.isValidTransaction(consumble.cost[consumble.nowLevel]))
+            {
+                itm.buyButton.interactable = false;
+                itm.pricetext.color = Color.red;
+            }
+            else
+            {
+                itm.pricetext.color = Color.black;
+            }
+
+        }
     }
 }

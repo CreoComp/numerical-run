@@ -51,7 +51,7 @@ public class ShopCharacterList : ShopList
 
 	protected void RefreshButton(ShopItemListItem itm, Character c)
 	{
-		if (PlayerData.instance.isValidTransaction(-c.cost))
+		if (!PlayerData.instance.isValidTransaction(-c.cost))
 		{
 			itm.buyButton.interactable = false;
 			itm.pricetext.color = Color.red;
