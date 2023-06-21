@@ -6,6 +6,12 @@ public class ExtraLife : Consumable
 {
     protected const int k_MaxLives = 3;
     protected const int k_CoinValue = 10;
+    public static float duration_time;
+
+    private void Awake()
+    {
+        duration = duration_time;
+    }
     public override string GetConsumableName()
     {
         return "Life";

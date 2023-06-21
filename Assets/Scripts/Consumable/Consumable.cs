@@ -9,12 +9,15 @@ using Unity.VisualScripting;
 public abstract class Consumable : MonoBehaviour
 {
     public int index;
-
     public float duration
     {
         get
         {
             return BoosterUpgrade.Instance.boosters[index].duration[BoosterUpgrade.Instance.boosters[index].nowLevel];
+        }
+        set
+        {
+            duration = value;
         }
     }
 
