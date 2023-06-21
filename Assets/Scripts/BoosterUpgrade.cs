@@ -43,7 +43,7 @@ public class BoosterUpgrade : MonoBehaviour
             PlayerData.instance.AddCoins(-cost);
 
 
-            consumble.nowLevel++; 
+            consumble.nowLevel++;
 
             Upgrade?.Invoke();
             if (consumble.nowLevel <= consumble.cost.Count - 1)

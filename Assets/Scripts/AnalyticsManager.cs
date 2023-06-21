@@ -11,7 +11,7 @@ public static class AnalyticsManager
     {
         Analytics.CustomEvent("OpenGame", new Dictionary<string, object>
         {
-            {"CountOpenGame", PlayerData.instance.CountOpenGame},
+            {"CountOpenGame", PlayerData.instance.CountOpenGame}
         });
 
 
@@ -20,6 +20,17 @@ public static class AnalyticsManager
 
     public static void Menu()
     {
+        Debug.Log("123");
+
+        if (PlayerData.instance.highscores.Count != 0)
+        {
+            Analytics.CustomEvent("OpenMenu", new Dictionary<string, object>
+            {
+                {  "HighScore", PlayerData.instance.highscores[0]}
+            });
+        }
+
+
         Analytics.CustomEvent("OpenMenu", new Dictionary<string, object>
         {
 
@@ -30,13 +41,7 @@ public static class AnalyticsManager
 
 
 
-        if (PlayerData.instance.highscores.Count != 0)
-        {
-            Analytics.CustomEvent("OpenMenu", new Dictionary<string, object>
-            {
-                {  "HighScore", PlayerData.instance.highscores[0]}
-            });
-        }
+
     }
 public static void CompleteMission()
     {

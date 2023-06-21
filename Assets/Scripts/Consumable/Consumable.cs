@@ -45,8 +45,9 @@ public abstract class Consumable : MonoBehaviour
 
     private void Awake()
     {
-        Boosters consumble = BoosterUpgrade.Instance.boosters[index];
-        duration = consumble.duration[consumble.nowLevel];
+            Boosters consumble = BoosterUpgrade.Instance.boosters[index];
+        if (consumble.duration.Count - 1 >= consumble.nowLevel)
+            duration = consumble.duration[consumble.nowLevel];
     }
     public void ResetTime()
     {

@@ -6,6 +6,5 @@ public class OpenMenu : MonoBehaviour
 {
     private void Awake()
     {
-        AnalyticsManager.Menu();
     }
 }

@@ -47,9 +47,11 @@ public class GameOverState : AState
             MusicPlayer.instance.SetStem(0, gameOverTheme);
 			StartCoroutine(MusicPlayer.instance.RestartAllStems());
         }
+        AnalyticsManager.Menu();
+
     }
 
-	public override void Exit(AState to)
+    public override void Exit(AState to)
     {
         canvas.gameObject.SetActive(false);
         FinishRun();
