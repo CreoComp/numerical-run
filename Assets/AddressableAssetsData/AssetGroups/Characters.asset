@@ -55,16 +55,8 @@ MonoBehaviour:
     m_Address: Assets/Prefabs/UI/Score.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: 6c14d9f6bbae6d44fb4f41277fe1a4a7
-    m_Address: Assets/Prefabs/Sity/Obstacles/Barrier01 Variant.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels: []
   - m_GUID: 053e27f52931c0740a3afa2ecc38c5a5
     m_Address: Assets/Prefabs/Sity/Obstacles/Barrier02.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-  - m_GUID: 494c4d9872df85c459dbc3939a2f9d24
-    m_Address: Assets/Prefabs/Sity/Obstacles/Barrier03.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: a8cbd3d5bf2d6db498f70092b762f139
