@@ -20,7 +20,6 @@ public static class AnalyticsManager
 
     public static void Menu()
     {
-        Debug.Log("123");
 
         if (PlayerData.instance.highscores.Count != 0)
         {
@@ -58,6 +57,16 @@ public static void CompleteMission()
         Analytics.CustomEvent("AdForLife", new Dictionary<string, object>
         {
             {"WatchAdForLife", 1}
+
+        });
+
+    }
+
+    public static void InterstitialAd()
+    {
+        Analytics.CustomEvent("InterstitialAd", new Dictionary<string, object>
+        {
+            {"InterstitialAd", 1}
 
         });
 

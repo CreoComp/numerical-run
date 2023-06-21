@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.AddressableAssets;
+using GamePush;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
 #if UNITY_ADS
@@ -70,6 +71,36 @@ public class GameState : AState
     protected int m_CurrentSegmentObstacleIndex = 0;
     protected TrackSegment m_NextValidSegment = null;
     protected int k_ObstacleToClear = 3;
+
+    private void OnEnable()
+    {
+        GP_Ads.OnRewardedReward += OnRewarded;
+    }
+
+    private void OnDisable()
+    {
+        GP_Ads.OnRewardedReward -= OnRewarded;
+    }
+
+    // При вызове метода можно указать любое текстовое значение
+    // Например: COINS или GEMS
+    public void ShowRewarded(string idOrTag)
+    {
+        GP_Ads.ShowRewarded(idOrTag);
+    }
+
+    // При успешном просмотре Reward рекламы
+    // можно даввать награду проверяя указанное значение:
+    private void OnRewarded(string idOrTag)
+    {
+        if (idOrTag == "LIFE")
+        {
+            SecondWind();
+
+            AnalyticsManager.RewardedAdClick();
+        }
+    }
+
 
     public override void Enter(AState from)
     {
@@ -397,16 +428,6 @@ public class GameState : AState
         StartGame();
     }
 
-    public void ShowRewardedAd()
-    {
-        if (m_GameoverSelectionDone)
-            return;
-
-        m_GameoverSelectionDone = true;
-
-
-		GameOver();
-    }
 
 
     void TutorialCheckObstacleClear()
