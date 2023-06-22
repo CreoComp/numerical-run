@@ -34,6 +34,7 @@ public class PlayerData
 
 
     public int Coins;
+    public int Fragments;
     public Dictionary<Consumable.ConsumableType, int> consumables = new Dictionary<Consumable.ConsumableType, int>();   // Inventory of owned consumables and quantity.
 
     public List<string> characters = new List<string>();    // Inventory of characters owned.
@@ -259,6 +260,7 @@ public class PlayerData
 		m_Instance.usedAccessory = -1;
 
         m_Instance.Coins = 0;
+        m_Instance.Fragments = 0;
 
 		m_Instance.characters.Add("Trash Cat");
 		m_Instance.themes.Add("Day");
@@ -286,7 +288,8 @@ public class PlayerData
 		}
 
         Coins = r.ReadInt32();
-
+        Fragments = r.ReadInt32();
+        
         consumables.Clear();
         int consumableCount = r.ReadInt32();
         for (int i = 0; i < consumableCount; ++i)
@@ -409,12 +412,28 @@ public class PlayerData
 
      public bool isValidTransaction(int amount) =>
         Coins + amount >= 0;
-    public void Save()
+
+     public void AddFragments(int amount)
+     {
+         if (IsValidTransactionInFragments(amount))
+         {
+             Fragments += amount;
+         }
+         Save();
+     }
+
+     public bool IsValidTransactionInFragments(int amount)
+     {
+         return Fragments + amount >= 0;
+     }
+     
+     public void Save()
     {
         BinaryWriter w = new BinaryWriter(new FileStream(saveFile, FileMode.OpenOrCreate));
 
         w.Write(s_Version);
         w.Write(Coins);
+        w.Write(Fragments);
 
         w.Write(consumables.Count);
         foreach(KeyValuePair<Consumable.ConsumableType, int> p in consumables)
@@ -499,6 +518,12 @@ public class PlayerDataEditor : Editor
     {
         PlayerData.instance.Coins += 1000000;
         PlayerData.instance.Save();
+    }
+
+    [MenuItem("Trash Dash Debug/Give 1000 fragments")]
+    public static void GiveFragments()
+    {
+        PlayerData.instance.AddFragments(1000);
     }
 
     [MenuItem("Trash Dash Debug/Give 9 Consumables of each types")]
