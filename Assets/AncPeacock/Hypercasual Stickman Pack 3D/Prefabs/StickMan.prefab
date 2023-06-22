@@ -625,7 +625,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 397d959cc2da2684c8109d35be73c4a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterName: StickMan
+  characterName: Stick Man
   costInFragments: 0
   accessories: []
   animator: {fileID: -2593221800728949539}

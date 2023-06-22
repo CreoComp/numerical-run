@@ -30,11 +30,6 @@ MonoBehaviour:
     m_Address: Assets/Prefabs/UI/Header.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: 473ffa016efe3724cad08daa78e3d12a
-    m_Address: Rubbish Raccoon
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - characters
   - m_GUID: 71514012df4dcd146957cb145cec8287
     m_Address: Assets/Prefabs/UI/MissionEntry.prefab
     m_ReadOnly: 0
@@ -59,6 +54,91 @@ MonoBehaviour:
     m_Address: Assets/Prefabs/Sity/SitySection01.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 11011f8bcdc309c4494c162a3268130f
+    m_Address: Chef
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - characters
+  - m_GUID: 75506d37b151e2e4786e086c06dc9329
+    m_Address: Stick Man
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - characters
+  - m_GUID: d7d539dc9c3e16c499f90574d11434b5
+    m_Address: Child
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - characters
+  - m_GUID: 3443d2dab36d1424aad92a81c1c8f30b
+    m_Address: Father 1
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - characters
+  - m_GUID: fa2b561d7be654b4db93fd4db745c40f
+    m_Address: Female 1
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - characters
+  - m_GUID: 0eb00c860df25c6428fa96660843e197
+    m_Address: Female 2
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - characters
+  - m_GUID: 0f9463563d6af6a45a6c5d07b07d9381
+    m_Address: Female Cheater
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - characters
+  - m_GUID: 415697adee33d7b4398d6dea626dddc9
+    m_Address: Killer
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - characters
+  - m_GUID: 57b657c02ff96a14595aba4d2358842d
+    m_Address: Male 1
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - characters
+  - m_GUID: 0aedc250c0be3cf49ba39e6676bdc3dc
+    m_Address: Male 2
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - characters
+  - m_GUID: 3292c93bbb64e3648b9030003a24fe17
+    m_Address: Male Cheater
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - characters
+  - m_GUID: 7533a4c33e8fec34f987bca4548976d3
+    m_Address: Mother
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - characters
+  - m_GUID: 8c73cc3ce56694c42a711cc4c3417d9f
+    m_Address: Nerd
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - characters
+  - m_GUID: f530e298805ffe545a3f36bdc58c378d
+    m_Address: Sherif
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - characters
+  - m_GUID: 94828747e1ca04e42b3e113a72d33fb8
+    m_Address: ShirtGuy 2
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - characters
+  - m_GUID: d781d58488583fb40a0e8357cfd08260
+    m_Address: ShirtGuy 1
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - characters
+  - m_GUID: 473ffa016efe3724cad08daa78e3d12a
+    m_Address: Rubbish Raccoon
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - characters
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 735e874f947d0e143a6b4e83f8a7283a, type: 2}
   m_SchemaSet:

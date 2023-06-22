@@ -525,7 +525,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 397d959cc2da2684c8109d35be73c4a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterName: MaleCheater
+  characterName: Male Cheater
   costInFragments: 100
   accessories: []
   animator: {fileID: -1714224940792016594}

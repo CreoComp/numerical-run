@@ -72,8 +72,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterName: Rubbish Raccoon
-  cost: 50000
-  premiumCost: 20
+  costInFragments: 5
   accessories:
   - {fileID: 114000010521015430}
   - {fileID: 114000011194972576}

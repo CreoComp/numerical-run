@@ -749,7 +749,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 397d959cc2da2684c8109d35be73c4a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterName: ShirtGuy2
+  characterName: ShirtGuy 2
   costInFragments: 140
   accessories: []
   animator: {fileID: 346257633613966336}

@@ -876,7 +876,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 397d959cc2da2684c8109d35be73c4a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterName: Father
+  characterName: Father 1
   costInFragments: 30
   accessories: []
   animator: {fileID: -1790262430204147139}
