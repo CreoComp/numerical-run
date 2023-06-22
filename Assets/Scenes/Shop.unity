@@ -715,7 +715,7 @@ GameObject:
   - component: {fileID: 204033635}
   - component: {fileID: 204033638}
   m_Layer: 5
-  m_Name: Accesories
+  m_Name: LootBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -735,11 +735,11 @@ RectTransform:
   m_Children:
   - {fileID: 1957126285}
   m_Father: {fileID: 903420613}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 86.25, y: -38}
+  m_AnchoredPosition: {x: 257, y: -38}
   m_SizeDelta: {x: -521.5, y: 72}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &204033635
@@ -1630,7 +1630,7 @@ RectTransform:
   m_Children:
   - {fileID: 368158652}
   m_Father: {fileID: 1805800640}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -2262,7 +2262,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Themes
+  m_Text: upgrade
 --- !u!222 &509968595
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2306,7 +2306,7 @@ RectTransform:
   m_Children:
   - {fileID: 1703640690}
   m_Father: {fileID: 1805800640}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -3947,8 +3947,8 @@ RectTransform:
   m_Children:
   - {fileID: 1863947571}
   - {fileID: 2106213335}
-  - {fileID: 204033633}
   - {fileID: 2041260336}
+  - {fileID: 204033633}
   m_Father: {fileID: 1805800640}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7900,8 +7900,8 @@ RectTransform:
   - {fileID: 451050331}
   - {fileID: 813758698}
   - {fileID: 1374068293}
-  - {fileID: 540240813}
   - {fileID: 415189871}
+  - {fileID: 540240813}
   - {fileID: 1270755504}
   - {fileID: 786885851}
   m_Father: {fileID: 1425020434}
@@ -8573,7 +8573,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: def1d6ee76162ea419e6e697f1fb5be5, type: 3}
-    m_FontSize: 26
+    m_FontSize: 35
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 2
@@ -8584,7 +8584,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Accessories
+  m_Text: LootBox
 --- !u!222 &1957126287
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -8765,7 +8765,7 @@ GameObject:
   - component: {fileID: 2041260338}
   - component: {fileID: 2041260341}
   m_Layer: 5
-  m_Name: Themes
+  m_Name: Uphrade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8785,11 +8785,11 @@ RectTransform:
   m_Children:
   - {fileID: 509968593}
   m_Father: {fileID: 903420613}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 258.75, y: -38}
+  m_AnchoredPosition: {x: 86, y: -38}
   m_SizeDelta: {x: -521.5, y: 72}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2041260338
