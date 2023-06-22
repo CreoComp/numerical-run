@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System;
+using UnityEngine.Serialization;
 
 /// <summary>
 /// Mainly used as a data container to define a character. This script is attached to the prefab
@@ -8,10 +9,9 @@ using System;
 public class Character : MonoBehaviour
 {
     public string characterName;
-    public int cost;
-	public int premiumCost;
+    [FormerlySerializedAs("cost")] public int costInFragments;
 
-	public CharacterAccessories[] accessories;
+    public CharacterAccessories[] accessories;
 
     public Animator animator;
 	public Sprite icon;

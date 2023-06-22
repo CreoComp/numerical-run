@@ -15,7 +15,7 @@ public class ShopCharacterList : ShopList
         {
             Destroy(t.gameObject);
         }
-
+        
         foreach(KeyValuePair<string, Character> pair in CharacterDatabase.dictionary)
         {
             Character c = pair.Value;
@@ -32,10 +32,10 @@ public class ShopCharacterList : ShopList
                     newEntry.transform.SetParent(listRoot, false);
 
                     ShopItemListItem itm = newEntry.GetComponent<ShopItemListItem>();
-
+                    
                     itm.icon.sprite = c.icon;
                     itm.nameText.text = c.characterName;
-                    itm.pricetext.text = c.cost.ToString();
+                    itm.pricetext.text = c.costInFragments.ToString();
 
                     itm.buyButton.image.sprite = itm.buyButtonSprite;
 
@@ -51,7 +51,7 @@ public class ShopCharacterList : ShopList
 
 	protected void RefreshButton(ShopItemListItem itm, Character c)
 	{
-		if (!PlayerData.instance.isValidTransaction(-c.cost))
+		if (!PlayerData.instance.IsValidTransactionInFragments(-c.costInFragments))
 		{
 			itm.buyButton.interactable = false;
 			itm.pricetext.color = Color.red;
@@ -74,9 +74,8 @@ public class ShopCharacterList : ShopList
 
 	public void Buy(Character c)
     {
-        PlayerData.instance.AddCoins(-c.cost);
+        PlayerData.instance.AddFragments(-c.costInFragments);
         PlayerData.instance.AddCharacter(c.characterName);
-
         // Repopulate to change button accordingly.
         Populate();
     }
