@@ -31432,7 +31432,7 @@ PrefabInstance:
     - target: {fileID: 689889123946312515, guid: bb3a5a1f01d441e4e9734a98a4b2e87d,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.325
+      value: -0.74
       objectReference: {fileID: 0}
     - target: {fileID: 689889123946312515, guid: bb3a5a1f01d441e4e9734a98a4b2e87d,
         type: 3}
@@ -31462,7 +31462,7 @@ PrefabInstance:
     - target: {fileID: 689889123946312515, guid: bb3a5a1f01d441e4e9734a98a4b2e87d,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 1.39
+      value: 2.06
       objectReference: {fileID: 0}
     - target: {fileID: 689889123946312515, guid: bb3a5a1f01d441e4e9734a98a4b2e87d,
         type: 3}
@@ -31484,5 +31484,40 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 704408732}
+    - target: {fileID: 689889123978729546, guid: bb3a5a1f01d441e4e9734a98a4b2e87d,
+        type: 3}
+      propertyPath: m_fontStyle
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 689889123978729546, guid: bb3a5a1f01d441e4e9734a98a4b2e87d,
+        type: 3}
+      propertyPath: m_fontColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 689889123978729546, guid: bb3a5a1f01d441e4e9734a98a4b2e87d,
+        type: 3}
+      propertyPath: m_fontColor.g
+      value: 0.82196254
+      objectReference: {fileID: 0}
+    - target: {fileID: 689889123978729546, guid: bb3a5a1f01d441e4e9734a98a4b2e87d,
+        type: 3}
+      propertyPath: m_fontColor.r
+      value: 0.0990566
+      objectReference: {fileID: 0}
+    - target: {fileID: 689889123978729546, guid: bb3a5a1f01d441e4e9734a98a4b2e87d,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
+    - target: {fileID: 689889123978729546, guid: bb3a5a1f01d441e4e9734a98a4b2e87d,
+        type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4294955545
+      objectReference: {fileID: 0}
+    - target: {fileID: 689889123978729546, guid: bb3a5a1f01d441e4e9734a98a4b2e87d,
+        type: 3}
+      propertyPath: m_enableWordWrapping
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb3a5a1f01d441e4e9734a98a4b2e87d, type: 3}
