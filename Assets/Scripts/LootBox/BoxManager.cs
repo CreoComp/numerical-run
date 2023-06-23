@@ -79,12 +79,14 @@ public class BoxManager : MonoBehaviour
         yield return new WaitForSeconds(2f); // поставимть время анимации
         panel.SetActive(true);
         panel.GetComponent<Animator>().SetTrigger("open");
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
         isWaitToCloseBox = true;
     }
 
     void CloseBox()
     {
+        boxAnim.SetTrigger("close");
+
         isWaitToCloseBox = false;
 
         panel.SetActive(false);
