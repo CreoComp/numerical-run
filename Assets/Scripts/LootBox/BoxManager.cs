@@ -21,6 +21,7 @@ public class BoxManager : MonoBehaviour
 
 
     [SerializeField] TextMeshProUGUI Coins;
+    [SerializeField] TextMeshProUGUI Fragments;
     [SerializeField] TextMeshProUGUI AmountSecondItemText;
 
 
@@ -63,14 +64,41 @@ public class BoxManager : MonoBehaviour
         openBoxCount--;
         StartCoroutine(StartOpen());
 
-        int AmountStars = Random.Range(10, 100);
+        int AmountStars = Random.Range(10, 35);
+        int AmountFragments = Random.Range(1, 10);
         int SecondItem = Random.Range(1, SecondItemSprite.Length);
-        int AmountSecondItem = Random.Range(1, 3);
+        int AmountSecondItem = 1;
 
+        Fragments.text = AmountFragments + "";
         SecondItemImage.sprite = SecondItemSprite[SecondItem];
         Coins.text = AmountStars + "";
         AmountSecondItemText.text = AmountSecondItem + "";
 
+
+        PlayerData.instance.AddCoins(AmountStars);
+
+        switch(SecondItem)
+        {
+            case 0:
+                PlayerData.instance.Add(Consumable.ConsumableType.COIN_MAG);
+
+                break;
+
+            case 1:
+                PlayerData.instance.Add(Consumable.ConsumableType.INVINCIBILITY);
+
+                break;
+
+            case 2:
+                PlayerData.instance.Add(Consumable.ConsumableType.SCORE_MULTIPLAYER);
+
+                break;
+        }
+
+
+
+        PlayerData.instance.AddCoins(AmountStars);
+        PlayerData.instance.AddFragments(AmountFragments);
     }
 
     IEnumerator StartOpen()
@@ -85,21 +113,18 @@ public class BoxManager : MonoBehaviour
 
     void CloseBox()
     {
+        if (openBoxCount <= 0)
+        {
+            SceneManager.LoadScene("Shop");
+        }
+        ImageTap.SetActive(true);
+        isWaitToOpen = true;
         boxAnim.SetTrigger("close");
 
         isWaitToCloseBox = false;
 
         panel.SetActive(false);
 
-        if (openBoxCount <=0)
-        {
-            SceneManager.LoadScene("Main");
-        }
-        else
-        {
-            ImageTap.SetActive(true);
-            isWaitToOpen = true;
-        }
     }
 
 }

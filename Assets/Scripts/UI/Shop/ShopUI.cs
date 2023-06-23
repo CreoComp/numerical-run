@@ -15,7 +15,7 @@ public class ShopUI : MonoBehaviour
 
     public ShopItemList itemList;
     public ShopCharacterList characterList;
-    public ShopAccessoriesList accessoriesList;
+    public ShopBoxesList accessoriesList;
     public ShopConsumbleUpgradeList ShopConsumbleUpgradeList;
 
     [Header("UI")]
@@ -107,7 +107,8 @@ public class ShopUI : MonoBehaviour
         return ; //you can't cheat in production build
 #endif
 
-        PlayerData.instance.AddCoins(-k_CheatCoins);
+        PlayerData.instance.AddCoins(k_CheatCoins);
+        PlayerData.instance.AddFragments(k_CheatCoins);
 	}
 
 }

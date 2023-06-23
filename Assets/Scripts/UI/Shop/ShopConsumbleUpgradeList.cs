@@ -31,7 +31,7 @@ public class ShopConsumbleUpgradeList : ShopList
 
     protected void RefreshButton(ShopItemListItem itm)
 	{
-		Boosters consumble = BoosterUpgrade.Instance.boosters[itm.index - 1];
+		Boosters consumble = BoosterUpgrade.Instance.boosters[itm.gameObject.GetComponent<ConsumbleUpdateElement>().index - 1];
 
 
 
@@ -44,20 +44,21 @@ public class ShopConsumbleUpgradeList : ShopList
 			itm.buyButton.transform.GetChild(0).GetComponent<UnityEngine.UI.Text>().text = "Max Level";
             itm.pricetext.text = "";
 
-            return;
 		}
 		else
 		{
             itm.pricetext.text = consumble.cost[consumble.nowLevel] + "";
 
 
-            if (!PlayerData.instance.isValidTransaction(consumble.cost[consumble.nowLevel]))
+            if (!PlayerData.instance.isValidTransaction(-consumble.cost[consumble.nowLevel]))
             {
                 itm.buyButton.interactable = false;
                 itm.pricetext.color = Color.red;
             }
             else
             {
+                itm.buyButton.interactable = true;
+
                 itm.pricetext.color = Color.black;
             }
 
