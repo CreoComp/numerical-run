@@ -25,6 +25,30 @@ MonoBehaviour:
     m_Address: PremiumCollectible
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 48a7f73e04acbf0428b15aa705224952
+    m_Address: Assets/Prefabs/City/Numbers/Two.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 02047a82ce9a1d742b5f43780cea68fd
+    m_Address: Assets/Prefabs/City/Numbers/Three.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: db099582098965e4d9637df71a1a40a4
+    m_Address: Assets/Prefabs/City/Numbers/One.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: c9d6554f2bde9e24184747ec60ffcf33
+    m_Address: Assets/Prefabs/City/Numbers/Four.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 8c5b3634bfe84d34aa45ee41a3f5183c
+    m_Address: Assets/Prefabs/City/Numbers/Five.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: f1e3442fff6a42b49b22286492a1f865
+    m_Address: Assets/Prefabs/City/Numbers/NumberSpawnPoint.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 735e874f947d0e143a6b4e83f8a7283a, type: 2}
   m_SchemaSet:

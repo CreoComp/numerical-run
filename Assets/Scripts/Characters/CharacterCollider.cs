@@ -124,9 +124,9 @@ public class CharacterCollider : MonoBehaviour
 
 			c.enabled = false;
 
-            Obstacle ob = c.gameObject.GetComponent<Obstacle>();
+            Obstacle ob = c.gameObject.GetComponent<Obstacle>() ?? c.gameObject.GetComponentInParent<Obstacle>();
 
-			if (ob != null)
+            if (ob != null)
 			{
 				ob.Impacted();
 			}

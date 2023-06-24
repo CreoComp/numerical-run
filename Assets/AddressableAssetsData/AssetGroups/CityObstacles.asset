@@ -1,0 +1,95 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: CityObstacles
+  m_EditorClassIdentifier: 
+  m_GroupName: CityObstacles
+  m_Data:
+    m_SerializedData: []
+  m_GUID: e5cf994027aa5af46a3a2bd01f3c8d0f
+  m_SerializeEntries:
+  - m_GUID: 74082d488dd77ca4ba33dc0b5743e6f4
+    m_Address: Barrier01
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 053e27f52931c0740a3afa2ecc38c5a5
+    m_Address: Barrier02
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: a77ace28600420540a235380cfeecd73
+    m_Address: Barrier03
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 86779df4bfae6d144b31f83735db674a
+    m_Address: Obstacle 1 V1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 8b8670d3c9d3dc147b6f18205703cc5f
+    m_Address: Obstacle 2 V1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 6a59539bea29d7c4cbf5f38b579f9816
+    m_Address: Obstacle 3 V1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 025b9e0b9c727374c80800839e2ed427
+    m_Address: Obstacle 6 V1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 1ae92aa0c8faee54386c576bc2401eb7
+    m_Address: Obstacle 7 V1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 1cd8c181d84ee04468a7f4bd116bc7fe
+    m_Address: Obstacle 8 V1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: c046495f15f1aa141a2f02a7a4e9abbf
+    m_Address: Obstacle 10 V1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 90a26d9fcf7f1ca45bcd6f1be375d6d1
+    m_Address: Obstacle 13 V1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: c9475a289231704488ed8435725a3a2b
+    m_Address: Obstacle 14 V1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: ae0de7ccf73d60b479d69b6d0b655ab9
+    m_Address: Obstacle 18 V1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 0362522e3398eb042ae75801303bd35b
+    m_Address: Obstacle 19 V1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 80c2c9e74cc4f184e8244d52e6616ff4
+    m_Address: Obstacle 21 V1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: edd52a31d943cfe4d8909d48b5f8f80a
+    m_Address: Obstacle 26 V1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 623cb2eec112a59499892980802e161f
+    m_Address: Obstacle 27 V1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 1376a6eb28908bc4b85ac46be042f711
+    m_Address: SidewalkPoles
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 735e874f947d0e143a6b4e83f8a7283a, type: 2}
+  m_SchemaSet:
+    m_Schemas: []

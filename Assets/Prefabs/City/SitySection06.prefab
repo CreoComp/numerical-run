@@ -215,8 +215,17 @@ MonoBehaviour:
   manager: {fileID: 0}
   objectRoot: {fileID: 0}
   collectibleTransform: {fileID: 0}
-  possibleObstacles: []
-  obstaclePositions: []
+  possibleObstacles:
+  - m_AssetGUID: 623cb2eec112a59499892980802e161f
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  - m_AssetGUID: 1376a6eb28908bc4b85ac46be042f711
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  obstaclePositions:
+  - 0.5
 --- !u!1001 &251740935997872553
 PrefabInstance:
   m_ObjectHideFlags: 0
