@@ -110,10 +110,15 @@ public class CharacterCollider : MonoBehaviour
 			if (c.GetComponent<Coin>())
             {
 				Coin.coinPool.Free(c.gameObject);
-                //PlayerData.instance.coins += 1;
 				controller.Numbers += 1;
 				m_Audio.PlayOneShot(coinSound);
             }
+			else if (c.GetComponent<FlashCoin>())
+			{
+				FlashCoin.FlashCoinPool.Free(c.gameObject);
+				PlayerData.instance.AddCoins(1);
+				m_Audio.PlayOneShot(premiumSound);
+			}
         }
         else if(c.gameObject.layer == k_ObstacleLayerIndex)
         {
