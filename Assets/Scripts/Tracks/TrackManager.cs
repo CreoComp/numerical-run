@@ -237,6 +237,7 @@ public class TrackManager : MonoBehaviour
             m_SafeSegementLeft = m_IsTutorial ? 0 : k_StartingSafeSegments;
 
             Coin.coinPool = new Pooler(currentTheme.collectiblePrefab, k_StartingCoinPoolSize);
+            FlashCoin.FlashCoinPool = new Pooler(currentTheme.premiumCollectible, k_StartingCoinPoolSize);
 
             PlayerData.instance.StartRunMissions(this);
 
