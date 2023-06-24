@@ -59,11 +59,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - characters
-  - m_GUID: 75506d37b151e2e4786e086c06dc9329
-    m_Address: Stick Man
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - characters
   - m_GUID: d7d539dc9c3e16c499f90574d11434b5
     m_Address: Child
     m_ReadOnly: 0
