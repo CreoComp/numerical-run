@@ -6,5 +6,6 @@
     Three = 3,
     Four = 4,
     Five = 5,
+    PremiumCollectible = 6,
     ObjectSpawner = 100
 }

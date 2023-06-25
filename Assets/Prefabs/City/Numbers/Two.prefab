@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2589143807470769139}
   - component: {fileID: 3415738009847233529}
   - component: {fileID: 5570775030117814855}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: polySurface2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,8 +92,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2205599766797755975}
-  - component: {fileID: 4722748498222247913}
-  m_Layer: 0
+  - component: {fileID: 129471425610858663}
+  - component: {fileID: 4347979508586851216}
+  m_Layer: 8
   m_Name: Two
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -116,7 +117,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4722748498222247913
+--- !u!114 &129471425610858663
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -125,6 +126,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 8890840132474693853}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b1d85a2c7e28e1459060064df24f9b7, type: 3}
+  m_Script: {fileID: 11500000, guid: 56c92283f3324377ade92170b0000153, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Value: 2
+--- !u!65 &4347979508586851216
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8890840132474693853}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.67, y: 0.78, z: 0.64}
+  m_Center: {x: 0, y: 0.36, z: 0}

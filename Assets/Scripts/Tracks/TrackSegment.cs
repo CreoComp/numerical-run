@@ -87,9 +87,10 @@ public class TrackSegment : MonoBehaviour
 		while(collectibleTransform.childCount > 0)
 		{
 			Transform t = collectibleTransform.GetChild(0);
-			t.SetParent(null);
-            Coin.coinPool.Free(t.gameObject);
-            FlashCoin.FlashCoinPool.Free(t.gameObject);
+			manager.PoolService.Return(t.gameObject);
+            //t.SetParent(null);
+            //Coin.coinPool.Free(t.gameObject);
+            //FlashCoin.FlashCoinPool.Free(t.gameObject);
 		}
 
 	    Addressables.ReleaseInstance(gameObject);

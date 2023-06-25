@@ -61,13 +61,13 @@ public class CharacterCollider : MonoBehaviour
     protected const int k_ObstacleLayerIndex = 9;
     protected const int k_PowerupLayerIndex = 10;
     protected const float k_DefaultInvinsibleTime = 2f;
-
+    
     protected void Start()
     {
 		m_Collider = GetComponent<BoxCollider>();
 		m_Audio = GetComponent<AudioSource>();
 		m_StartingColliderHeight = m_Collider.bounds.size.y;
-	}
+    }
 
 	public void Init()
 	{
@@ -107,15 +107,18 @@ public class CharacterCollider : MonoBehaviour
 			if (magnetCoins.Contains(c.gameObject))
 				magnetCoins.Remove(c.gameObject);
 
-			if (c.GetComponent<Coin>())
+			if (c.TryGetComponent(out Number number))
             {
-				Coin.coinPool.Free(c.gameObject);
-				controller.Numbers += 1;
+				//Coin.coinPool.Free(c.gameObject);
+				controller.trackManager.PoolService.Return(number.gameObject);
+				//Debug.Log($"Number value: {number.Value}");
+				controller.Numbers += number.Value;
 				m_Audio.PlayOneShot(coinSound);
             }
-			else if (c.GetComponent<FlashCoin>())
+			else if (c.TryGetComponent(out FlashCoin flashCoin))
 			{
-				FlashCoin.FlashCoinPool.Free(c.gameObject);
+				//FlashCoin.FlashCoinPool.Free(c.gameObject);
+				controller.trackManager.PoolService.Return(flashCoin.gameObject);
 				PlayerData.instance.AddCoins(1);
 				m_Audio.PlayOneShot(premiumSound);
 			}

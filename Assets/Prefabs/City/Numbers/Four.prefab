@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8705654717256043015}
   - component: {fileID: 760349941397035515}
   - component: {fileID: 4996551703044890588}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: polySurface4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,8 +92,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 372948179000211670}
-  - component: {fileID: -2905238357584736872}
-  m_Layer: 0
+  - component: {fileID: 3600092766446631657}
+  - component: {fileID: 3052783992191423615}
+  m_Layer: 8
   m_Name: Four
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -116,7 +117,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-2905238357584736872
+--- !u!114 &3600092766446631657
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -125,6 +126,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 4472714084016760196}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b1d85a2c7e28e1459060064df24f9b7, type: 3}
+  m_Script: {fileID: 11500000, guid: 56c92283f3324377ade92170b0000153, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Value: 4
+--- !u!65 &3052783992191423615
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4472714084016760196}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.67, y: 0.76, z: 0.75}
+  m_Center: {x: 0, y: 0.39, z: 0}

@@ -34,16 +34,20 @@ using UnityEngine.Analytics;
 /// </summary>
 public class TrackManager : MonoBehaviour
 {
-    static public TrackManager instance { get { return s_Instance; } }
+    static public TrackManager instance
+    {
+        get { return s_Instance; }
+    }
+
     static protected TrackManager s_Instance;
 
     static int s_StartHash = Animator.StringToHash("Start");
 
     public delegate int MultiplierModifier(int current);
+
     public MultiplierModifier modifyMultiply;
 
-    [Header("Character & Movements")]
-    public CharacterInputController characterController;
+    [Header("Character & Movements")] public CharacterInputController characterController;
     public float minSpeed = 5.0f;
     public float maxSpeed = 10.0f;
     public int speedStep = 4;
@@ -51,41 +55,97 @@ public class TrackManager : MonoBehaviour
 
     public bool invincible = false;
 
-    [Header("Objects")]
-    public ConsumableDatabase consumableDatabase;
+    [Header("Objects")] public ConsumableDatabase consumableDatabase;
     public MeshFilter skyMeshFilter;
 
-    [Header("Parallax")]
-    public Transform parallaxRoot;
+    [Header("Parallax")] public Transform parallaxRoot;
     public float parallaxRatio = 0.5f;
 
-    [Header("Tutorial")]
-    public ThemeData tutorialThemeData;
+    [Header("Tutorial")] public ThemeData tutorialThemeData;
 
     public System.Action<TrackSegment> newSegmentCreated;
     public System.Action<TrackSegment> currentSegementChanged;
 
-    public int trackSeed { get { return m_TrackSeed; } set { m_TrackSeed = value; } }
+    public int trackSeed
+    {
+        get { return m_TrackSeed; }
+        set { m_TrackSeed = value; }
+    }
 
-    public float timeToStart { get { return m_TimeToStart; } }  // Will return -1 if already started (allow to update UI)
+    public float timeToStart
+    {
+        get { return m_TimeToStart; }
+    } // Will return -1 if already started (allow to update UI)
 
-    public int score { get { return m_Score; } }
-    public int multiplier { get { return m_Multiplier; } }
-    public float currentSegmentDistance { get { return m_CurrentSegmentDistance; } }
-    public float worldDistance { get { return m_TotalWorldDistance; } }
-    public float speed { get { return m_Speed; } }
-    public float speedRatio { get { return (m_Speed - minSpeed) / (maxSpeed - minSpeed); } }
-    public int currentZone { get { return m_CurrentZone; } }
+    public int score
+    {
+        get { return m_Score; }
+    }
 
-    public TrackSegment currentSegment { get { return m_Segments[0]; } }
-    public List<TrackSegment> segments { get { return m_Segments; } }
-    public ThemeData currentTheme { get { return m_CurrentThemeData; } }
+    public int multiplier
+    {
+        get { return m_Multiplier; }
+    }
 
-    public bool isMoving { get { return m_IsMoving; } }
-    public bool isRerun { get { return m_Rerun; } set { m_Rerun = value; } }
+    public float currentSegmentDistance
+    {
+        get { return m_CurrentSegmentDistance; }
+    }
 
-    public bool isTutorial { get { return m_IsTutorial; } set { m_IsTutorial = value; } }
+    public float worldDistance
+    {
+        get { return m_TotalWorldDistance; }
+    }
+
+    public float speed
+    {
+        get { return m_Speed; }
+    }
+
+    public float speedRatio
+    {
+        get { return (m_Speed - minSpeed) / (maxSpeed - minSpeed); }
+    }
+
+    public int currentZone
+    {
+        get { return m_CurrentZone; }
+    }
+
+    public TrackSegment currentSegment
+    {
+        get { return m_Segments[0]; }
+    }
+
+    public List<TrackSegment> segments
+    {
+        get { return m_Segments; }
+    }
+
+    public ThemeData currentTheme
+    {
+        get { return m_CurrentThemeData; }
+    }
+
+    public bool isMoving
+    {
+        get { return m_IsMoving; }
+    }
+
+    public bool isRerun
+    {
+        get { return m_Rerun; }
+        set { m_Rerun = value; }
+    }
+
+    public bool isTutorial
+    {
+        get { return m_IsTutorial; }
+        set { m_IsTutorial = value; }
+    }
+
     public bool isLoaded { get; set; }
+
     //used by the obstacle spawning code in the tutorial, as it need to spawn the 1st obstacle in the middle lane
     public bool firstObstacle { get; set; }
 
@@ -100,7 +160,7 @@ public class TrackManager : MonoBehaviour
     protected bool m_IsMoving;
     protected float m_Speed;
 
-    protected float m_TimeSincePowerup;     // The higher it goes, the higher the chance of spawning one
+    protected float m_TimeSincePowerup; // The higher it goes, the higher the chance of spawning one
     protected float m_TimeSinceLastPremium;
     protected float m_TimeSinceLastNumber;
 
@@ -117,12 +177,15 @@ public class TrackManager : MonoBehaviour
 
     protected int m_Score;
     protected float m_ScoreAccum;
-    protected bool m_Rerun;     // This lets us know if we are entering a game over (ads) state or starting a new game (see GameState)
 
-    protected bool m_IsTutorial; //Tutorial is a special run that don't chance section until the tutorial step is "validated" by the TutorialState.
-    
+    protected bool
+        m_Rerun; // This lets us know if we are entering a game over (ads) state or starting a new game (see GameState)
+
+    protected bool
+        m_IsTutorial; //Tutorial is a special run that don't chance section until the tutorial step is "validated" by the TutorialState.
+
     Vector3 m_CameraOriginalPos = Vector3.zero;
-    
+
     const float k_FloatingOriginThreshold = 10000f;
 
     protected const float k_CountdownToStartLength = 5f;
@@ -135,13 +198,13 @@ public class TrackManager : MonoBehaviour
     protected const float k_Acceleration = 0.2f;
 
     public PoolService PoolService;
-    
+
     protected void Awake()
     {
         m_ScoreAccum = 0.0f;
         s_Instance = this;
     }
-    
+
     public void StartMove(bool isRestart = true)
     {
         characterController.StartMoving();
@@ -185,7 +248,7 @@ public class TrackManager : MonoBehaviour
         {
             firstObstacle = true;
             m_CameraOriginalPos = Camera.main.transform.position;
-            
+
             if (m_TrackSeed != -1)
                 Random.InitState(m_TrackSeed);
             else
@@ -205,9 +268,11 @@ public class TrackManager : MonoBehaviour
             yield return op;
             if (op.Result == null || !(op.Result is GameObject))
             {
-                Debug.LogWarning(string.Format("Unable to load character {0}.", PlayerData.instance.characters[PlayerData.instance.usedCharacter]));
+                Debug.LogWarning(string.Format("Unable to load character {0}.",
+                    PlayerData.instance.characters[PlayerData.instance.usedCharacter]));
                 yield break;
             }
+
             Character player = op.Result.GetComponent<Character>();
 
             player.SetupAccesory(PlayerData.instance.usedAccessory);
@@ -217,7 +282,7 @@ public class TrackManager : MonoBehaviour
 
             characterController.Init();
             characterController.CheatInvincible(invincible);
-            
+
             //Instantiate(CharacterDatabase.GetCharacter(PlayerData.instance.characters[PlayerData.instance.usedCharacter]), Vector3.zero, Quaternion.identity);
             player.transform.SetParent(characterController.characterCollider.transform, false);
             Camera.main.transform.SetParent(characterController.transform, true);
@@ -225,7 +290,8 @@ public class TrackManager : MonoBehaviour
             if (m_IsTutorial)
                 m_CurrentThemeData = tutorialThemeData;
             else
-                m_CurrentThemeData = ThemeDatabase.GetThemeData(PlayerData.instance.themes[PlayerData.instance.usedTheme]);
+                m_CurrentThemeData =
+                    ThemeDatabase.GetThemeData(PlayerData.instance.themes[PlayerData.instance.usedTheme]);
 
             m_CurrentZone = 0;
             m_CurrentZoneDistance = 0;
@@ -243,8 +309,8 @@ public class TrackManager : MonoBehaviour
 
             m_SafeSegementLeft = m_IsTutorial ? 0 : k_StartingSafeSegments;
 
-            Coin.coinPool = new Pooler(currentTheme.collectiblePrefab, k_StartingCoinPoolSize);
-            FlashCoin.FlashCoinPool = new Pooler(currentTheme.premiumCollectible, k_StartingCoinPoolSize);
+            //Coin.coinPool = new Pooler(currentTheme.collectiblePrefab, k_StartingCoinPoolSize);
+            //FlashCoin.FlashCoinPool = new Pooler(currentTheme.premiumCollectible, k_StartingCoinPoolSize);
 
             PlayerData.instance.StartRunMissions(this);
 
@@ -307,6 +373,7 @@ public class TrackManager : MonoBehaviour
 
     private int _parallaxRootChildren = 0;
     private int _spawnedSegments = 0;
+
     void Update()
     {
         while (_spawnedSegments < (m_IsTutorial ? 4 : k_DesiredSegmentCount))
@@ -319,7 +386,10 @@ public class TrackManager : MonoBehaviour
         {
             while (_parallaxRootChildren < currentTheme.cloudNumber)
             {
-                float lastZ = parallaxRoot.childCount == 0 ? 0 : parallaxRoot.GetChild(parallaxRoot.childCount - 1).position.z + currentTheme.cloudMinimumDistance.z;
+                float lastZ = parallaxRoot.childCount == 0
+                    ? 0
+                    : parallaxRoot.GetChild(parallaxRoot.childCount - 1).position.z +
+                      currentTheme.cloudMinimumDistance.z;
 
                 GameObject cloud = currentTheme.cloudPrefabs[Random.Range(0, currentTheme.cloudPrefabs.Length)];
                 if (cloud != null)
@@ -382,7 +452,8 @@ public class TrackManager : MonoBehaviour
         // Parallax Handling
         if (parallaxRoot != null)
         {
-            Vector3 difference = (currentPos - characterTransform.position) * parallaxRatio; ;
+            Vector3 difference = (currentPos - characterTransform.position) * parallaxRatio;
+            ;
             int count = parallaxRoot.childCount;
             for (int i = 0; i < count; i++)
             {
@@ -495,6 +566,7 @@ public class TrackManager : MonoBehaviour
     }
 
     private readonly Vector3 _offScreenSpawnPos = new Vector3(-100f, -100f, -100f);
+
     public IEnumerator SpawnNewSegment()
     {
         if (!m_IsTutorial)
@@ -504,15 +576,19 @@ public class TrackManager : MonoBehaviour
         }
 
         int segmentUse = Random.Range(0, m_CurrentThemeData.zones[m_CurrentZone].prefabList.Length);
-        if (segmentUse == m_PreviousSegment) segmentUse = (segmentUse + 1) % m_CurrentThemeData.zones[m_CurrentZone].prefabList.Length;
+        if (segmentUse == m_PreviousSegment)
+            segmentUse = (segmentUse + 1) % m_CurrentThemeData.zones[m_CurrentZone].prefabList.Length;
 
-        AsyncOperationHandle segmentToUseOp = m_CurrentThemeData.zones[m_CurrentZone].prefabList[segmentUse].InstantiateAsync(_offScreenSpawnPos, Quaternion.identity);
+        AsyncOperationHandle segmentToUseOp = m_CurrentThemeData.zones[m_CurrentZone].prefabList[segmentUse]
+            .InstantiateAsync(_offScreenSpawnPos, Quaternion.identity);
         yield return segmentToUseOp;
         if (segmentToUseOp.Result == null || !(segmentToUseOp.Result is GameObject))
         {
-            Debug.LogWarning(string.Format("Unable to load segment {0}.", m_CurrentThemeData.zones[m_CurrentZone].prefabList[segmentUse].Asset.name));
+            Debug.LogWarning(string.Format("Unable to load segment {0}.",
+                m_CurrentThemeData.zones[m_CurrentZone].prefabList[segmentUse].Asset.name));
             yield break;
         }
+
         TrackSegment newSegment = (segmentToUseOp.Result as GameObject).GetComponent<TrackSegment>();
 
         Vector3 currentExitPoint;
@@ -571,7 +647,7 @@ public class TrackManager : MonoBehaviour
     private IEnumerator SpawnFromAssetReference(AssetReference reference, TrackSegment segment, int posIndex)
     {
         AsyncOperationHandle op = Addressables.LoadAssetAsync<GameObject>(reference);
-        yield return op; 
+        yield return op;
         GameObject obj = op.Result as GameObject;
         if (obj != null)
         {
@@ -632,13 +708,17 @@ public class TrackManager : MonoBehaviour
                             m_TimeSincePowerup = 0.0f;
                             powerupChance = 0.0f;
 
-                            AsyncOperationHandle op = Addressables.InstantiateAsync(consumableDatabase.consumbales[picked].gameObject.name, pos, rot);
+                            AsyncOperationHandle op =
+                                Addressables.InstantiateAsync(consumableDatabase.consumbales[picked].gameObject.name,
+                                    pos, rot);
                             yield return op;
                             if (op.Result == null || !(op.Result is GameObject))
                             {
-                                Debug.LogWarning(string.Format("Unable to load consumable {0}.", consumableDatabase.consumbales[picked].gameObject.name));
+                                Debug.LogWarning(string.Format("Unable to load consumable {0}.",
+                                    consumableDatabase.consumbales[picked].gameObject.name));
                                 yield break;
                             }
+
                             toUse = op.Result as GameObject;
                             toUse.transform.SetParent(segment.transform, true);
                         }
@@ -648,38 +728,53 @@ public class TrackManager : MonoBehaviour
                         m_TimeSinceLastPremium = 0.0f;
                         premiumChance = 0.0f;
 
-                        AsyncOperationHandle op = Addressables.InstantiateAsync(currentTheme.premiumCollectible.name, pos, rot);
+                        GameObject spawnerGo = PoolService.Get(GameObjectsTypeId.ObjectSpawner);
+                        spawnerGo.gameObject.transform.SetParent(segment.collectibleTransform, true);
+                        spawnerGo.transform.position = pos;
+                        spawnerGo.transform.rotation = rot;
+
+                        PickableObjectSpawner spawner = spawnerGo.GetComponent<PickableObjectSpawner>();
+                        spawner.Construct(GameObjectsTypeId.PremiumCollectible, PoolService,
+                            segment.transform, pos, rot);
+
+                        toUse = spawner.Spawn();
+
+                        PoolService.Return(spawnerGo);
+                        
+                        /*AsyncOperationHandle op =
+                            Addressables.InstantiateAsync(currentTheme.premiumCollectible.name, pos, rot);
                         yield return op;
                         if (op.Result == null || !(op.Result is GameObject))
                         {
-                            Debug.LogWarning(string.Format("Unable to load collectable {0}.", currentTheme.premiumCollectible.name));
+                            Debug.LogWarning(string.Format("Unable to load collectable {0}.",
+                                currentTheme.premiumCollectible.name));
                             yield break;
                         }
+
                         toUse = op.Result as GameObject;
-                        toUse.transform.SetParent(segment.transform, true);
+                        toUse.transform.SetParent(segment.transform, true);*/
                     }
-                    else if(Random.value < numberChance)
+                    else if (Random.value < numberChance)
                     {
                         m_TimeSinceLastNumber = 0;
-                        
-                        IEnumerable<GameObjectsTypeId> types = ((GameObjectsTypeId[])Enum.GetValues(typeof(GameObjectsTypeId))).Where(
-                            x => (int)x < 100);
+
+                        IEnumerable<GameObjectsTypeId> types =
+                            ((GameObjectsTypeId[])Enum.GetValues(typeof(GameObjectsTypeId))).Where(
+                                x => (int)x < 100);
                         int count = types.Count();
                         GameObject spawnerGo = PoolService.Get(GameObjectsTypeId.ObjectSpawner);
                         spawnerGo.gameObject.transform.SetParent(segment.collectibleTransform, true);
                         spawnerGo.transform.position = pos;
                         spawnerGo.transform.rotation = rot;
-                        Debug.Log((spawnerGo));//types.ElementAt(Random.Range(0, count)));
-                        //if(spawnerGo is not null)
-                        //{
-                            PickableObjectSpawner spawner = spawnerGo.GetComponent<PickableObjectSpawner>();
-                            spawner.Construct(types.ElementAt(Random.Range(0, count)), PoolService,
-                                segment.collectibleTransform, pos, rot);
 
-                            toUse = spawner.Spawn();
+                        PickableObjectSpawner spawner = spawnerGo.GetComponent<PickableObjectSpawner>();
+                        spawner.Construct(types.ElementAt(Random.Range(0, count)), PoolService,
+                            segment.collectibleTransform, pos, rot);
 
-                            PoolService.Return(spawnerGo);
-                        //}
+                        toUse = spawner.Spawn();
+
+                        PoolService.Return(spawnerGo);
+
                         //toUse = Coin.coinPool.Get(pos, rot);
                         //toUse.transform.SetParent(segment.collectibleTransform, true);
                     }
