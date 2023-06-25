@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using System.Collections.Generic;
 
 /// <summary>
@@ -16,6 +17,13 @@ public class GameManager : MonoBehaviour
 
     protected List<AState> m_StateStack = new List<AState>();
     protected Dictionary<string, AState> m_StateDict = new Dictionary<string, AState>();
+    public PoolService PoolService;
+
+    private async void Awake()
+    {
+        PoolService = new PoolService();
+        await PoolService.Initialize();
+    }
 
     protected void OnEnable()
     {

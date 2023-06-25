@@ -102,6 +102,7 @@ public class TrackManager : MonoBehaviour
 
     protected float m_TimeSincePowerup;     // The higher it goes, the higher the chance of spawning one
     protected float m_TimeSinceLastPremium;
+    protected float m_TimeSinceLastNumber;
 
     protected int m_Multiplier;
 
@@ -133,16 +134,14 @@ public class TrackManager : MonoBehaviour
     protected const float k_SegmentRemovalDistance = -30f;
     protected const float k_Acceleration = 0.2f;
 
-    private PoolService _poolService;
+    public PoolService PoolService;
     
-    protected async void Awake()
+    protected void Awake()
     {
         m_ScoreAccum = 0.0f;
         s_Instance = this;
-        _poolService = new PoolService();
-        await _poolService.Initialize();
     }
-
+    
     public void StartMove(bool isRestart = true)
     {
         characterController.StartMoving();
@@ -483,6 +482,7 @@ public class TrackManager : MonoBehaviour
     {
         m_TimeSincePowerup += Time.deltaTime;
         m_TimeSinceLastPremium += Time.deltaTime;
+        m_TimeSinceLastNumber += Time.deltaTime;
     }
 
     public void ChangeZone()
@@ -591,6 +591,7 @@ public class TrackManager : MonoBehaviour
 
             float powerupChance = Mathf.Clamp01(Mathf.Floor(m_TimeSincePowerup) * 0.5f * 0.001f);
             float premiumChance = Mathf.Clamp01(Mathf.Floor(m_TimeSinceLastPremium) * 0.5f * 0.0001f);
+            float numberChance = Mathf.Clamp01(Mathf.Floor(m_TimeSinceLastNumber) * 0.5f);
 
             while (currentWorldPos < segment.worldLength)
             {
@@ -657,26 +658,28 @@ public class TrackManager : MonoBehaviour
                         toUse = op.Result as GameObject;
                         toUse.transform.SetParent(segment.transform, true);
                     }
-                    else
+                    else if(Random.value < numberChance)
                     {
+                        m_TimeSinceLastNumber = 0;
+                        
                         IEnumerable<GameObjectsTypeId> types = ((GameObjectsTypeId[])Enum.GetValues(typeof(GameObjectsTypeId))).Where(
                             x => (int)x < 100);
                         int count = types.Count();
-                        GameObject spawnerGo = _poolService.Get(GameObjectsTypeId.ObjectSpawner);
+                        GameObject spawnerGo = PoolService.Get(GameObjectsTypeId.ObjectSpawner);
                         spawnerGo.gameObject.transform.SetParent(segment.collectibleTransform, true);
                         spawnerGo.transform.position = pos;
                         spawnerGo.transform.rotation = rot;
                         Debug.Log((spawnerGo));//types.ElementAt(Random.Range(0, count)));
-                        if(spawnerGo is not null)
-                        {
+                        //if(spawnerGo is not null)
+                        //{
                             PickableObjectSpawner spawner = spawnerGo.GetComponent<PickableObjectSpawner>();
-                            spawner.Construct(types.ElementAt(Random.Range(0, count)), _poolService,
+                            spawner.Construct(types.ElementAt(Random.Range(0, count)), PoolService,
                                 segment.collectibleTransform, pos, rot);
 
                             toUse = spawner.Spawn();
 
-                            _poolService.Return(spawnerGo);
-                        }
+                            PoolService.Return(spawnerGo);
+                        //}
                         //toUse = Coin.coinPool.Get(pos, rot);
                         //toUse.transform.SetParent(segment.collectibleTransform, true);
                     }

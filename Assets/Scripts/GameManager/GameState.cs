@@ -149,6 +149,7 @@ public class GameState : AState
 
         m_IsTutorial = !PlayerData.instance.tutorialDone;
         trackManager.isTutorial = m_IsTutorial;
+        trackManager.PoolService = manager.PoolService;
 
         if (m_IsTutorial)
         {

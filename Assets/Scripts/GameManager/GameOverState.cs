@@ -26,6 +26,7 @@ public class GameOverState : AState
 
     public override void Enter(AState from)
     {
+        trackManager.PoolService.Clear();
         canvas.gameObject.SetActive(true);
 
 		miniLeaderboard.playerEntry.inputName.text = PlayerData.instance.previousName;

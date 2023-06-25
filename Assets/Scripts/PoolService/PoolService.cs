@@ -56,7 +56,10 @@ public class PoolService : IPoolService
 
     public void Clear()
     {
-        _poolsRepository.Clear();
+        foreach (KeyValuePair<GameObjectsTypeId, Pool> pool in _poolsRepository)
+        {
+            pool.Value.ClearPool();
+        }
     }
 
     public void Clear(GameObjectsTypeId gameObjectsTypeId)
