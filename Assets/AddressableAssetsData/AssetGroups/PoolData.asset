@@ -10,48 +10,38 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
-  m_Name: Coin
+  m_Name: PoolData
   m_EditorClassIdentifier: 
-  m_GroupName: Coin
+  m_GroupName: PoolData
   m_Data:
     m_SerializedData: []
-  m_GUID: 89278b1b8bdb81c4996129605154b1d9
+  m_GUID: 1dfada64c05952047a0320806c909999
   m_SerializeEntries:
-  - m_GUID: 16cac8b68c4ca6448baecd0680e025f6
-    m_Address: Pickup
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-  - m_GUID: ac3c86c2382618643bfda6ab3cc81a0b
-    m_Address: PremiumCollectible
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-  - m_GUID: 48a7f73e04acbf0428b15aa705224952
-    m_Address: Two
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-  - m_GUID: 02047a82ce9a1d742b5f43780cea68fd
-    m_Address: Three
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-  - m_GUID: db099582098965e4d9637df71a1a40a4
+  - m_GUID: 75e2404ce164fe141ad49a3bfee1e761
     m_Address: One
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: c9d6554f2bde9e24184747ec60ffcf33
+  - m_GUID: df4ca1cb4e594764887aa6cc954ebd00
+    m_Address: Two
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: f01eaaad5ce3b1e409bfd12d89d887fb
+    m_Address: Three
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 1a4f045b6f60e1c488848f95611725ea
     m_Address: Four
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: 8c5b3634bfe84d34aa45ee41a3f5183c
+  - m_GUID: 6b2534d23e1ae5146a9ead3987b85575
     m_Address: Five
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: f1e3442fff6a42b49b22286492a1f865
+  - m_GUID: 0923f4e0e87b27c498db9a1559823904
     m_Address: ObjectSpawner
     m_ReadOnly: 0
     m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 735e874f947d0e143a6b4e83f8a7283a, type: 2}
   m_SchemaSet:
-    m_Schemas:
-    - {fileID: 11400000, guid: 319ae0878c1110f4991e668cb11210f7, type: 2}
-    - {fileID: 11400000, guid: 025fae613a04243428f577ad1ee50562, type: 2}
+    m_Schemas: []

@@ -1,12 +1,16 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Linq;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using HalfDiggers.Runner;
 using UnityEditor;
 using UnityEngine.AddressableAssets;
 using UnityEngine.Analytics;
 using UnityEngine.ResourceManagement;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using GameObject = UnityEngine.GameObject;
+using Random = UnityEngine.Random;
 
 #if UNITY_ANALYTICS
 using UnityEngine.Analytics;
@@ -128,11 +132,15 @@ public class TrackManager : MonoBehaviour
     protected const int k_DesiredSegmentCount = 10;
     protected const float k_SegmentRemovalDistance = -30f;
     protected const float k_Acceleration = 0.2f;
+
+    private PoolService _poolService;
     
-    protected void Awake()
+    protected async void Awake()
     {
         m_ScoreAccum = 0.0f;
         s_Instance = this;
+        _poolService = new PoolService();
+        await _poolService.Initialize();
     }
 
     public void StartMove(bool isRestart = true)
@@ -650,8 +658,26 @@ public class TrackManager : MonoBehaviour
                     }
                     else
                     {
-                        toUse = Coin.coinPool.Get(pos, rot);
-                        toUse.transform.SetParent(segment.collectibleTransform, true);
+                        IEnumerable<GameObjectsTypeId> types = ((GameObjectsTypeId[])Enum.GetValues(typeof(GameObjectsTypeId))).Where(
+                            x => (int)x < 100);
+                        int count = types.Count();
+                        GameObject spawnerGo = _poolService.Get(GameObjectsTypeId.ObjectSpawner);
+                        spawnerGo.gameObject.transform.SetParent(segment.collectibleTransform, true);
+                        spawnerGo.transform.position = pos;
+                        spawnerGo.transform.rotation = rot;
+                        Debug.Log((spawnerGo));//types.ElementAt(Random.Range(0, count)));
+                        if(spawnerGo is not null)
+                        {
+                            PickableObjectSpawner spawner = spawnerGo.GetComponent<PickableObjectSpawner>();
+                            spawner.Construct(types.ElementAt(Random.Range(0, count)), _poolService,
+                                segment.collectibleTransform, pos, rot);
+
+                            toUse = spawner.Spawn();
+
+                            _poolService.Return(spawnerGo);
+                        }
+                        //toUse = Coin.coinPool.Get(pos, rot);
+                        //toUse.transform.SetParent(segment.collectibleTransform, true);
                     }
 
                     if (toUse != null)
