@@ -8,7 +8,7 @@ public class AdsManager : MonoBehaviour
     public float timeToShow = 6;
     float time;
 
-    private void Update()
+   /* private void Update()
     {
         if (time <= timeToShow)
             time += Time.deltaTime;
@@ -20,7 +20,7 @@ public class AdsManager : MonoBehaviour
             GP_Ads.ShowFullscreen();
         }
     }
-
+   8?*/
 
 
 }

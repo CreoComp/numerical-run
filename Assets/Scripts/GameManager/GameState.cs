@@ -395,6 +395,16 @@ public class GameState : AState
 
     public void GameOver()
     {
+        PlayerData.instance.count++;
+        if(PlayerData.instance.count >= PlayerData.instance.countGamesToAd)
+        {
+            PlayerData.instance.count = 0;
+            AnalyticsManager.InterstitialAd();
+            GP_Ads.ShowFullscreen();
+
+        }
+
+
         manager.SwitchState("GameOver");
     }
 
