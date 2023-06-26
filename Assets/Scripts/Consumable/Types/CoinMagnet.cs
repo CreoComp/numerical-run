@@ -30,7 +30,7 @@ public class CoinMagnet : Consumable
 
         for(int i = 0; i< nb; ++i)
         {
-			Coin returnCoin = returnColls[i].GetComponent<Coin>();
+			Number returnCoin = returnColls[i].GetComponent<Number>();
 
 			if (returnCoin != null && returnCoin && !c.characterCollider.magnetCoins.Contains(returnCoin.gameObject))
 			{

@@ -3,11 +3,7 @@ using System.Linq;
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using HalfDiggers.Runner;
-using UnityEditor;
 using UnityEngine.AddressableAssets;
-using UnityEngine.Analytics;
-using UnityEngine.ResourceManagement;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using GameObject = UnityEngine.GameObject;
 using Random = UnityEngine.Random;
@@ -754,7 +750,7 @@ public class TrackManager : MonoBehaviour
                         toUse = op.Result as GameObject;
                         toUse.transform.SetParent(segment.transform, true);*/
                     }
-                    else if (Random.value < numberChance)
+                    else //if (Random.value < numberChance)
                     {
                         m_TimeSinceLastNumber = 0;
 
