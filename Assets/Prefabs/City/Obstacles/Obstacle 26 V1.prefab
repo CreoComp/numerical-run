@@ -158,6 +158,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dca403d99360dfc4582d297f39de6051, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _boxCollider: {fileID: 7333227735619187606}
   flameSpawners:
   - {fileID: 9121452527311242617}
   - {fileID: 9017011740960637800}
@@ -286,6 +287,7 @@ GameObject:
   - component: {fileID: 6779870049285472103}
   - component: {fileID: 2218564779358889577}
   - component: {fileID: -1116614123412465797}
+  - component: {fileID: 7333227735619187606}
   m_Layer: 9
   m_Name: Obstacle 26 V1
   m_TagString: Untagged
@@ -468,6 +470,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   impactedSound: {fileID: 0}
+--- !u!65 &7333227735619187606
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4978187961265282738}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.2451986, y: 3.48, z: 1.2451986}
+  m_Center: {x: 0, y: 1.63, z: 0}
 --- !u!1 &8822189052859747563
 GameObject:
   m_ObjectHideFlags: 0

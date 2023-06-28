@@ -600,7 +600,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dca403d99360dfc4582d297f39de6051, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flameSpawners: []
+  _boxCollider: {fileID: 8906561626066073615}
+  flameSpawners:
+  - {fileID: 8891639522777316592}
+  - {fileID: 6662814298569084577}
+  - {fileID: 8358188324172508466}
+  - {fileID: 9133525176410350094}
+  - {fileID: 4262288493256928835}
+  - {fileID: 6021860458999942551}
 --- !u!1 &6992576641284790140
 GameObject:
   m_ObjectHideFlags: 0
@@ -724,6 +731,7 @@ GameObject:
   - component: {fileID: 8267972843397938785}
   - component: {fileID: 4782365253762242502}
   - component: {fileID: 8917161985043562474}
+  - component: {fileID: 8906561626066073615}
   m_Layer: 9
   m_Name: Obstacle 27 V1
   m_TagString: Untagged
@@ -906,3 +914,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   impactedSound: {fileID: 0}
+--- !u!65 &8906561626066073615
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7619317676755705780}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.4923477, y: 3.78807, z: 1.3783909}
+  m_Center: {x: -0.00000023841858, y: 1.7623881, z: 0}

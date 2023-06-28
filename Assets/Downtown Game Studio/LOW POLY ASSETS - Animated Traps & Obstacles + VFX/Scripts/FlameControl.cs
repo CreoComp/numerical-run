@@ -9,12 +9,14 @@ using UnityEngine.VFX;
 
 public class FlameControl : MonoBehaviour
 {
+    [SerializeField] private BoxCollider _boxCollider;
     public VisualEffect[] flameSpawners;
     private bool isPlaying = false;
 
     void Start()
     {
         flameSpawners = gameObject.GetComponentsInChildren<VisualEffect>();
+        _boxCollider.enabled = false;
         InvokeRepeating("TurnOnOffFire", 1, 2); //Controls the spawning of fire. 
     }
 
@@ -26,10 +28,12 @@ public class FlameControl : MonoBehaviour
         {
             if (isPlaying)
             {
+                _boxCollider.enabled = true;
                 effect.Play();
             }
             else
             {
+                _boxCollider.enabled = false;
                 effect.Stop();
             }
         }
