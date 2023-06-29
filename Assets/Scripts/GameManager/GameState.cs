@@ -212,6 +212,7 @@ public class GameState : AState
             {
                 pauseButton.gameObject.SetActive(false);
                 chrCtrl.CleanConsumable();
+                if(chrCtrl.character.animator != null)
                 chrCtrl.character.animator.SetBool("Dead", true);
                 chrCtrl.characterCollider.koParticle.gameObject.SetActive(true);
                 StartCoroutine(WaitForGameOver());
@@ -276,12 +277,12 @@ public class GameState : AState
 
 	void OnApplicationPause(bool pauseStatus)
 	{
-		if (pauseStatus) Pause();
+	//	if (pauseStatus) Pause();
 	}
 
     void OnApplicationFocus(bool focusStatus)
     {
-        if (!focusStatus) Pause();
+     //   if (!focusStatus) Pause();
     }
 
     public void Pause(bool displayMenu = true)
