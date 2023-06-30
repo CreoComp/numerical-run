@@ -73,8 +73,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterName: Trash Cat
-  cost: 0
-  premiumCost: 0
+  costInFragments: 200
   accessories:
   - {fileID: 114000010124067434}
   - {fileID: 114000013004132168}

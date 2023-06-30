@@ -264,7 +264,7 @@ public class PlayerData
         m_Instance.Coins = 0;
         m_Instance.Fragments = 0;
 
-		m_Instance.characters.Add("Trash Cat");
+		m_Instance.characters.Add("Chef");
 		m_Instance.themes.Add("Day");
 
         m_Instance.ftueLevel = 0;
