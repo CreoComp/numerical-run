@@ -28,7 +28,6 @@ public class GameState : AState
 
     [Header("UI")]
     public Text coinText;
-    public Text fragmentsText;
     public Text scoreText;
 	public Text distanceText;
     public Text multiplierText;
@@ -330,7 +329,6 @@ public class GameState : AState
     protected void UpdateUI()
     {
         coinText.text = PlayerData.instance.Coins.ToString();
-        fragmentsText.text = PlayerData.instance.Fragments.ToString();
 
         scoreText.text = trackManager.score.ToString();
         multiplierText.text = "x " + trackManager.multiplier;
