@@ -111,6 +111,7 @@ public class PlayerData
     public void AddCharacter(string name)
     {
         characters.Add(name);
+        Save();
     }
 
     public void AddTheme(string theme)

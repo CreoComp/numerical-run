@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine.AddressableAssets;
 
 #if UNITY_ANALYTICS
@@ -15,8 +16,11 @@ public class ShopCharacterList : ShopList
         {
             Destroy(t.gameObject);
         }
+
+        var sortedDictionary =
+	        CharacterDatabase.dictionary.OrderBy(c => c.Value.costInFragments);
         
-        foreach(KeyValuePair<string, Character> pair in CharacterDatabase.dictionary)
+        foreach(KeyValuePair<string, Character> pair in sortedDictionary)
         {
             Character c = pair.Value;
             if (c != null)
