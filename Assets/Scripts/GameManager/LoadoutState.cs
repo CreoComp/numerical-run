@@ -243,6 +243,7 @@ public class LoadoutState : AState
             GameObject newChar = null;
             while (newChar == null)
             {
+                Debug.Log(PlayerData.instance.characters.Count);
                 Character c = CharacterDatabase.GetCharacter(PlayerData.instance.characters[PlayerData.instance.usedCharacter]);
 
                 if (c != null)

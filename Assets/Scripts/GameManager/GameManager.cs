@@ -28,7 +28,8 @@ public class GameManager : MonoBehaviour
     protected void OnEnable()
     {
         PlayerData.Create();
-
+        if(PlayerData.instance.characters.Count == 0)
+        PlayerData.Initialize();
         s_Instance = this;
 
         m_ConsumableDatabase.Load();

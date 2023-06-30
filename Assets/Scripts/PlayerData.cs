@@ -8,17 +8,18 @@ using UnityEngine.Analytics;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
+using YG;
 
 public struct HighscoreEntry : System.IComparable<HighscoreEntry>
 {
-	public string name;
-	public int score;
+    public string name;
+    public int score;
 
-	public int CompareTo(HighscoreEntry other)
-	{
-		// We want to sort from highest to lowest, so inverse the comparison.
-		return other.score.CompareTo(score);
-	}
+    public int CompareTo(HighscoreEntry other)
+    {
+        // We want to sort from highest to lowest, so inverse the comparison.
+        return other.score.CompareTo(score);
+    }
 }
 
 /// <summary>
@@ -38,7 +39,7 @@ public class PlayerData
     public Dictionary<Consumable.ConsumableType, int> consumables = new Dictionary<Consumable.ConsumableType, int>();   // Inventory of owned consumables and quantity.
 
     public List<string> characters = new List<string>();    // Inventory of characters owned.
-    public int usedCharacter;                               // Currently equipped character.
+    public int usedCharacter = 0;                               // Currently equipped character.
     public int usedAccessory = -1;
     public List<string> characterAccessories = new List<string>();  // List of owned accessories, in the form "charName:accessoryName".
     public List<string> themes = new List<string>();                // Owned themes.
@@ -46,7 +47,7 @@ public class PlayerData
     public List<HighscoreEntry> highscores = new List<HighscoreEntry>();
     public List<MissionBase> missions = new List<MissionBase>();
 
-	public string previousName = "Trash Cat";
+    public string previousName = "Trash Cat";
 
     public bool licenceAccepted;
     public bool tutorialDone = true;
@@ -64,12 +65,11 @@ public class PlayerData
         set
         {
             CountGames = value;
-            Save();
             AnalyticsManager.StartGame();
         }
     }
 
-	public float masterVolume = float.MinValue, musicVolume = float.MinValue, masterSFXVolume = float.MinValue;
+    public float masterVolume = float.MinValue, musicVolume = float.MinValue, masterSFXVolume = float.MinValue;
 
     //ftue = First Time User Expeerience. This var is used to track thing a player do for the first time. It increment everytime the user do one of the step
     //e.g. it will increment to 1 when they click Start, to 2 when doing the first run, 3 when running at least 300m etc.
@@ -80,15 +80,29 @@ public class PlayerData
     // This will allow us to add data even after production, and so keep all existing save STILL valid. See loading & saving for how it work.
     // Note in a real production it would probably reset that to 1 before release (as all dev save don't have to be compatible w/ final product)
     // Then would increment again with every subsequent patches. We kept it to its dev value here for teaching purpose. 
-    static int s_Version = 12; 
+    static int s_Version = 12;
+    public static void Initialize()
+    {
+        m_Instance.usedCharacter = 0;
+        m_Instance.usedTheme = 0;
+        m_Instance.usedAccessory = -1;
 
+        m_Instance.Coins = 0;
+        m_Instance.Fragments = 0;
+
+        m_Instance.characters.Add("Chef");
+        m_Instance.themes.Add("Day");
+
+        m_Instance.ftueLevel = 0;
+        m_Instance.rank = 0;
+    }
     public void Consume(Consumable.ConsumableType type)
     {
         if (!consumables.ContainsKey(type))
             return;
-
+        YandexGame.SaveProgress();
         consumables[type] -= 1;
-        if(consumables[type] == 0)
+        if (consumables[type] == 0)
         {
             consumables.Remove(type);
         }
@@ -136,7 +150,7 @@ public class PlayerData
     public void AddMission()
     {
         int val = Random.Range(0, (int)MissionBase.MissionType.MAX);
-        
+
         MissionBase newMission = MissionBase.GetNewMissionFromType((MissionBase.MissionType)val);
         newMission.Created();
 
@@ -145,7 +159,7 @@ public class PlayerData
 
     public void StartRunMissions(TrackManager manager)
     {
-        for(int i = 0; i < missions.Count; ++i)
+        for (int i = 0; i < missions.Count; ++i)
         {
             missions[i].RunStart(manager);
         }
@@ -153,7 +167,7 @@ public class PlayerData
 
     public void UpdateMissions(TrackManager manager)
     {
-        for(int i = 0; i < missions.Count; ++i)
+        for (int i = 0; i < missions.Count; ++i)
         {
             missions[i].Update(manager);
         }
@@ -170,10 +184,10 @@ public class PlayerData
     }
 
     public void ClaimMission(MissionBase mission)
-    {        
+    {
         AddCoins(mission.reward);
         AnalyticsManager.CompleteMission();
-        
+
 #if UNITY_ANALYTICS // Using Analytics Standard Events v0.3.0
         AnalyticsEvent.ItemAcquired(
             AcquisitionType.Premium, // Currency type
@@ -185,7 +199,7 @@ public class PlayerData
             rank.ToString()          // Level
         );
 #endif
-        
+
         missions.Remove(mission);
 
         CheckMissionsCount();
@@ -193,106 +207,106 @@ public class PlayerData
         Save();
     }
 
-	// High Score management
+    // High Score management
 
-	public int GetScorePlace(int score)
-	{
-		HighscoreEntry entry = new HighscoreEntry();
-		entry.score = score;
-		entry.name = "";
+    public int GetScorePlace(int score)
+    {
+        HighscoreEntry entry = new HighscoreEntry();
+        entry.score = score;
+        entry.name = "";
 
-		int index = highscores.BinarySearch(entry);
+        int index = highscores.BinarySearch(entry);
 
-		return index < 0 ? (~index) : index;
-	}
+        return index < 0 ? (~index) : index;
+    }
 
-	public void InsertScore(int score, string name)
-	{
-		HighscoreEntry entry = new HighscoreEntry();
-		entry.score = score;
-		entry.name = name;
+    public void InsertScore(int score, string name)
+    {
+        HighscoreEntry entry = new HighscoreEntry();
+        entry.score = score;
+        entry.name = name;
 
-		highscores.Insert(GetScorePlace(score), entry);
+        highscores.Insert(GetScorePlace(score), entry);
 
         // Keep only the 10 best scores.
         while (highscores.Count > 10)
             highscores.RemoveAt(highscores.Count - 1);
-	}
+    }
 
     // File management
 
     static public void Create()
     {
-		if (m_Instance == null)
-		{
-			m_Instance = new PlayerData();
+        if (m_Instance == null)
+        {
+            m_Instance = new PlayerData();
 
             //if we create the PlayerData, mean it's the very first call, so we use that to init the database
             //this allow to always init the database at the earlier we can, i.e. the start screen if started normally on device
             //or the Loadout screen if testing in editor
-		    CoroutineHandler.StartStaticCoroutine(CharacterDatabase.LoadDatabase());
-		    CoroutineHandler.StartStaticCoroutine(ThemeDatabase.LoadDatabase());
+            CoroutineHandler.StartStaticCoroutine(CharacterDatabase.LoadDatabase());
+            CoroutineHandler.StartStaticCoroutine(ThemeDatabase.LoadDatabase());
         }
 
-        m_Instance.saveFile = Application.persistentDataPath + "/save.bin";
+        /*   m_Instance.saveFile = Application.persistentDataPath + "/save.bin";
 
-        if (File.Exists(m_Instance.saveFile))
-        {
-            // If we have a save, we read it.
-            m_Instance.Read();
-        }
-        else
-        {
-            // If not we create one with default data.
-			NewSave();
-        }
+           if (File.Exists(m_Instance.saveFile))
+           {
+               // If we have a save, we read it.
+               m_Instance.Read();
+           }
+           else
+           {
+               // If not we create one with default data.
+               NewSave();
+           }
 
-        m_Instance.CheckMissionsCount();
+           m_Instance.CheckMissionsCount(); */
     }
 
-	static public void NewSave()
-	{
-		m_Instance.characters.Clear();
-		m_Instance.themes.Clear();
-		m_Instance.missions.Clear();
-		m_Instance.characterAccessories.Clear();
-		m_Instance.consumables.Clear();
+    static public void NewSave()
+    {
+        m_Instance.characters.Clear();
+        m_Instance.themes.Clear();
+        m_Instance.missions.Clear();
+        m_Instance.characterAccessories.Clear();
+        m_Instance.consumables.Clear();
 
-		m_Instance.usedCharacter = 0;
-		m_Instance.usedTheme = 0;
-		m_Instance.usedAccessory = -1;
+        m_Instance.usedCharacter = 0;
+        m_Instance.usedTheme = 0;
+        m_Instance.usedAccessory = -1;
 
         m_Instance.Coins = 0;
         m_Instance.Fragments = 0;
 
-		m_Instance.characters.Add("Chef");
-		m_Instance.themes.Add("Day");
+        m_Instance.characters.Add("Chef");
+        m_Instance.themes.Add("Day");
 
         m_Instance.ftueLevel = 0;
         m_Instance.rank = 0;
 
         m_Instance.CheckMissionsCount();
 
-		m_Instance.Save();
-	}
+        m_Instance.Save();
+    }
 
     public void Read()
     {
-            BinaryReader r = new BinaryReader(new FileStream(saveFile, FileMode.Open));
+        BinaryReader r = new BinaryReader(new FileStream(saveFile, FileMode.Open));
         int ver = r.ReadInt32();
 
-		if(ver < 6)
-		{
-			r.Close();
+        if (ver < 6)
+        {
+            r.Close();
 
-			NewSave();
-			r = new BinaryReader(new FileStream(saveFile, FileMode.Open));
-			ver = r.ReadInt32();
-		}
+            NewSave();
+            r = new BinaryReader(new FileStream(saveFile, FileMode.Open));
+            ver = r.ReadInt32();
+        }
 
         Coins = r.ReadInt32();
         Fragments = r.ReadInt32();
-        
+
         consumables.Clear();
         int consumableCount = r.ReadInt32();
         for (int i = 0; i < consumableCount; ++i)
@@ -303,7 +317,7 @@ public class PlayerData
         // Read character.
         characters.Clear();
         int charCount = r.ReadInt32();
-        for(int i = 0; i < charCount; ++i)
+        for (int i = 0; i < charCount; ++i)
         {
             string charName = r.ReadString();
 
@@ -337,27 +351,27 @@ public class PlayerData
 
         // Save contains the version they were written with. If data are added bump the version & test for that version before loading that data.
         // Added highscores.
-		if(ver >= 3)
-		{
-			highscores.Clear();
-			int count = r.ReadInt32();
-			for (int i = 0; i < count; ++i)
-			{
-				HighscoreEntry entry = new HighscoreEntry();
-				entry.name = r.ReadString();
-				entry.score = r.ReadInt32();
+        if (ver >= 3)
+        {
+            highscores.Clear();
+            int count = r.ReadInt32();
+            for (int i = 0; i < count; ++i)
+            {
+                HighscoreEntry entry = new HighscoreEntry();
+                entry.name = r.ReadString();
+                entry.score = r.ReadInt32();
 
-				highscores.Add(entry);
-			}
-		}
+                highscores.Add(entry);
+            }
+        }
 
         // Added missions.
-        if(ver >= 4)
+        if (ver >= 4)
         {
             missions.Clear();
 
             int count = r.ReadInt32();
-            for(int i = 0; i < count; ++i)
+            for (int i = 0; i < count; ++i)
             {
                 MissionBase.MissionType type = (MissionBase.MissionType)r.ReadInt32();
                 MissionBase tempMission = MissionBase.GetNewMissionFromType(type);
@@ -372,24 +386,24 @@ public class PlayerData
         }
 
         // Added highscore previous name used.
-		if(ver >= 7)
-		{
-			previousName = r.ReadString();
-		}
+        if (ver >= 7)
+        {
+            previousName = r.ReadString();
+        }
 
-        if(ver >= 8)
+        if (ver >= 8)
         {
             licenceAccepted = r.ReadBoolean();
         }
 
-		if (ver >= 9) 
-		{
-			masterVolume = r.ReadSingle ();
-			musicVolume = r.ReadSingle ();
-			masterSFXVolume = r.ReadSingle ();
-		}
+        if (ver >= 9)
+        {
+            masterVolume = r.ReadSingle();
+            musicVolume = r.ReadSingle();
+            masterSFXVolume = r.ReadSingle();
+        }
 
-        if(ver >= 10)
+        if (ver >= 10)
         {
             ftueLevel = r.ReadInt32();
             rank = r.ReadInt32();
@@ -406,101 +420,104 @@ public class PlayerData
 
     public void AddCoins(int amount)
     {
-        if(isValidTransaction(amount))
+        if (isValidTransaction(amount))
         {
             Coins += amount;
         }
         Save();
     }
 
-     public bool isValidTransaction(int amount) =>
-        Coins + amount >= 0;
+    public bool isValidTransaction(int amount) =>
+       Coins + amount >= 0;
 
-     public void AddFragments(int amount)
-     {
-         if (IsValidTransactionInFragments(amount))
-         {
-             Fragments += amount;
-         }
-         Save();
-     }
-
-     public bool IsValidTransactionInFragments(int amount)
-     {
-         return Fragments + amount >= 0;
-     }
-     
-     public void Save()
+    public void AddFragments(int amount)
     {
-        BinaryWriter w = new BinaryWriter(new FileStream(saveFile, FileMode.OpenOrCreate));
-
-        w.Write(s_Version);
-        w.Write(Coins);
-        w.Write(Fragments);
-
-        w.Write(consumables.Count);
-        foreach(KeyValuePair<Consumable.ConsumableType, int> p in consumables)
+        if (IsValidTransactionInFragments(amount))
         {
-            w.Write((int)p.Key);
-            w.Write(p.Value);
+            Fragments += amount;
         }
+        Save();
+    }
 
-        // Write characters.
-        w.Write(characters.Count);
-        foreach (string c in characters)
-        {
-            w.Write(c);
-        }
+    public bool IsValidTransactionInFragments(int amount)
+    {
+        return Fragments + amount >= 0;
+    }
 
-        w.Write(usedCharacter);
+    public void Save()
+    {
+        YandexGame.SaveProgress();
 
-        w.Write(characterAccessories.Count);
-        foreach (string a in characterAccessories)
-        {
-            w.Write(a);
-        }
 
-        // Write themes.
-        w.Write(themes.Count);
-        foreach (string t in themes)
-        {
-            w.Write(t);
-        }
+        /* BinaryWriter w = new BinaryWriter(new FileStream(saveFile, FileMode.OpenOrCreate));
 
-        w.Write(usedTheme);
+         w.Write(s_Version);
+         w.Write(Coins);
+         w.Write(Fragments);
 
-		// Write highscores.
-		w.Write(highscores.Count);
-		for(int i = 0; i < highscores.Count; ++i)
-		{
-			w.Write(highscores[i].name);
-			w.Write(highscores[i].score);
-		}
+         w.Write(consumables.Count);
+         foreach(KeyValuePair<Consumable.ConsumableType, int> p in consumables)
+         {
+             w.Write((int)p.Key);
+             w.Write(p.Value);
+         }
 
-        // Write missions.
-        w.Write(missions.Count);
-        for(int i = 0; i < missions.Count; ++i)
-        {
-            w.Write((int)missions[i].GetMissionType());
-            missions[i].Serialize(w);
-        }
+         // Write characters.
+         w.Write(characters.Count);
+         foreach (string c in characters)
+         {
+             w.Write(c);
+         }
 
-		// Write name.
-		w.Write(previousName);
+         w.Write(usedCharacter);
 
-        w.Write(licenceAccepted);
+         w.Write(characterAccessories.Count);
+         foreach (string a in characterAccessories)
+         {
+             w.Write(a);
+         }
 
-		w.Write (masterVolume);
-		w.Write (musicVolume);
-		w.Write (masterSFXVolume);
+         // Write themes.
+         w.Write(themes.Count);
+         foreach (string t in themes)
+         {
+             w.Write(t);
+         }
 
-        w.Write(ftueLevel);
-        w.Write(rank);
+         w.Write(usedTheme);
 
-        w.Write(tutorialDone);
-        w.Write(CountGames);
+         // Write highscores.
+         w.Write(highscores.Count);
+         for(int i = 0; i < highscores.Count; ++i)
+         {
+             w.Write(highscores[i].name);
+             w.Write(highscores[i].score);
+         }
 
-        w.Close();
+         // Write missions.
+         w.Write(missions.Count);
+         for(int i = 0; i < missions.Count; ++i)
+         {
+             w.Write((int)missions[i].GetMissionType());
+             missions[i].Serialize(w);
+         }
+
+         // Write name.
+         w.Write(previousName);
+
+         w.Write(licenceAccepted);
+
+         w.Write (masterVolume);
+         w.Write (musicVolume);
+         w.Write (masterSFXVolume);
+
+         w.Write(ftueLevel);
+         w.Write(rank);
+
+         w.Write(tutorialDone);
+         w.Write(CountGames);
+
+         w.Close(); */
     }
 
 
@@ -510,11 +527,12 @@ public class PlayerData
 #if UNITY_EDITOR
 public class PlayerDataEditor : Editor
 {
-	[MenuItem("Trash Dash Debug/Clear Save")]
+    [MenuItem("Trash Dash Debug/Clear Save")]
     static public void ClearSave()
     {
         File.Delete(Application.persistentDataPath + "/save.bin");
-    } 
+        YandexGame.ResetSaveProgress();
+    }
 
     [MenuItem("Trash Dash Debug/Give 1000000 fishbones and 1000 premium")]
     static public void GiveCoins()
@@ -532,11 +550,11 @@ public class PlayerDataEditor : Editor
     [MenuItem("Trash Dash Debug/Give 9 Consumables of each types")]
     static public void AddConsumables()
     {
-       
-        for(int i = 0; i < ShopItemList.s_ConsumablesTypes.Length; ++i)
+
+        for (int i = 0; i < ShopItemList.s_ConsumablesTypes.Length; ++i)
         {
             Consumable c = ConsumableDatabase.GetConsumbale(ShopItemList.s_ConsumablesTypes[i]);
-            if(c != null)
+            if (c != null)
             {
                 PlayerData.instance.consumables[c.GetConsumableType()] = 9;
             }
