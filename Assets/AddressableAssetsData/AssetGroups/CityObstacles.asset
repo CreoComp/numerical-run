@@ -89,6 +89,78 @@ MonoBehaviour:
     m_Address: SidewalkPoles
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 4b129f7e59fbdc14abbb2a555009261b
+    m_Address: Barrier01 V2
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: dc479047cc3a6524b8d0487e42a4e2c7
+    m_Address: Barrier02 V2
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: f3528debbf15af84eb6a812c80d63716
+    m_Address: Barrier03 V2
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 0f431898786d01942a4124fe4383d1f4
+    m_Address: Obstacle 1 V2
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 76b482ae4ca4f0a4fa27fdaa28396e5f
+    m_Address: Obstacle 2 V2
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 28c0d4bd51b03ae4485ed401cc449630
+    m_Address: Obstacle 3 V2
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 59068803d3c32e142a7119db316797d2
+    m_Address: Obstacle 6 V2
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 28fe048f070858c41857e359fc858336
+    m_Address: Obstacle 7 V2
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 9a7d660d0c35348499a02615764bd6c1
+    m_Address: Obstacle 8 V2
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 9904954d6a8cfa542a78c4e1c5c71008
+    m_Address: Obstacle 10 V2
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 37fe718041b972b4698a926bf4854a93
+    m_Address: Obstacle 13 V2
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 08726770905707f47a972cc62fc745bd
+    m_Address: Obstacle 14 V2
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: e23d0b512a6c45d4d8cc8a007e373a73
+    m_Address: Obstacle 18 V2
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 9814f99f33fefd74ca4c182bda328b35
+    m_Address: Obstacle 19 V2
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 0c2efc1cbe728b24084b8f67bf912b02
+    m_Address: Obstacle 21 V2
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 74fb519b5f3c4e94386517dd44d0e20c
+    m_Address: Obstacle 26 V2
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 6d10697cb9951a440947968a85c23d4c
+    m_Address: Obstacle 27 V2
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: e65854462bec15249adc105b004baa49
+    m_Address: SidewalkPoles V2
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 735e874f947d0e143a6b4e83f8a7283a, type: 2}
   m_SchemaSet:

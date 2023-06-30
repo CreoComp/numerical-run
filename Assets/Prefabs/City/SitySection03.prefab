@@ -90,15 +90,15 @@ MonoBehaviour:
   objectRoot: {fileID: 0}
   collectibleTransform: {fileID: 0}
   possibleObstacles:
-  - m_AssetGUID: 1ae92aa0c8faee54386c576bc2401eb7
+  - m_AssetGUID: 28fe048f070858c41857e359fc858336
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
-  - m_AssetGUID: 1cd8c181d84ee04468a7f4bd116bc7fe
+  - m_AssetGUID: 9a7d660d0c35348499a02615764bd6c1
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
-  - m_AssetGUID: c046495f15f1aa141a2f02a7a4e9abbf
+  - m_AssetGUID: 9904954d6a8cfa542a78c4e1c5c71008
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0

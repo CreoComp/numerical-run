@@ -178,15 +178,15 @@ MonoBehaviour:
   objectRoot: {fileID: 0}
   collectibleTransform: {fileID: 0}
   possibleObstacles:
-  - m_AssetGUID: 90a26d9fcf7f1ca45bcd6f1be375d6d1
+  - m_AssetGUID: 37fe718041b972b4698a926bf4854a93
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
-  - m_AssetGUID: c9475a289231704488ed8435725a3a2b
+  - m_AssetGUID: 08726770905707f47a972cc62fc745bd
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
-  - m_AssetGUID: ae0de7ccf73d60b479d69b6d0b655ab9
+  - m_AssetGUID: e23d0b512a6c45d4d8cc8a007e373a73
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
