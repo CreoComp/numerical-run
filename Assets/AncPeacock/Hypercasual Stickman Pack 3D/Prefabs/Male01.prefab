@@ -971,7 +971,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterName: Male 1
-  costInFragments: 80
+  costInFragments: 100
   accessories: []
   animator: {fileID: -2743801777068141547}
   icon: {fileID: 21300054, guid: e1a536f74c7ef384a8d7132148ace0c8, type: 3}

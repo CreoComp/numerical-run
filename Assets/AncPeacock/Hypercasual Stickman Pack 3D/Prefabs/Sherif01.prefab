@@ -499,7 +499,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterName: Sherif
-  costInFragments: 130
+  costInFragments: 150
   accessories: []
   animator: {fileID: -1354336952562032099}
   icon: {fileID: 21300054, guid: e1a536f74c7ef384a8d7132148ace0c8, type: 3}

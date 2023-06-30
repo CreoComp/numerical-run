@@ -146,7 +146,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterName: Nerd
-  costInFragments: 120
+  costInFragments: 200
   accessories: []
   animator: {fileID: -3111678702173270105}
   icon: {fileID: 21300054, guid: e1a536f74c7ef384a8d7132148ace0c8, type: 3}

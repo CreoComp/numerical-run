@@ -526,7 +526,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterName: Male Cheater
-  costInFragments: 100
+  costInFragments: 175
   accessories: []
   animator: {fileID: -1714224940792016594}
   icon: {fileID: 21300054, guid: e1a536f74c7ef384a8d7132148ace0c8, type: 3}

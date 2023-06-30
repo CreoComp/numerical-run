@@ -596,7 +596,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterName: Child
-  costInFragments: 20
+  costInFragments: 100
   accessories: []
   animator: {fileID: 5705109207109453688}
   icon: {fileID: 21300054, guid: e1a536f74c7ef384a8d7132148ace0c8, type: 3}

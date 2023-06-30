@@ -877,7 +877,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterName: Mother
-  costInFragments: 110
+  costInFragments: 175
   accessories: []
   animator: {fileID: -4044833141858121700}
   icon: {fileID: 21300054, guid: e1a536f74c7ef384a8d7132148ace0c8, type: 3}

@@ -85,7 +85,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterName: Chef
-  costInFragments: 10
+  costInFragments: 150
   accessories: []
   animator: {fileID: -7647292644009124079}
   icon: {fileID: 21300054, guid: e1a536f74c7ef384a8d7132148ace0c8, type: 3}
