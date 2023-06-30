@@ -20,6 +20,7 @@ public class ShopUI : MonoBehaviour
 
     [Header("UI")]
     public Text coinCounter;
+    public Text fragmnetsCounter;
     public Button cheatButton;
 
     protected ShopList m_OpenList;
@@ -56,6 +57,7 @@ public class ShopUI : MonoBehaviour
 	void Update ()
     {
         coinCounter.text = PlayerData.instance.Coins.ToString();
+        fragmnetsCounter.text = PlayerData.instance.Fragments.ToString();
     }
 
     public void OpenItemList()
