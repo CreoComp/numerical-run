@@ -95,7 +95,7 @@ public class ShopUI : MonoBehaviour
 
 	public void CloseScene()
 	{
-        SceneManager.UnloadSceneAsync("shop");
+        SceneManager.LoadSceneAsync("Main");
 	    LoadoutState loadoutState = GameManager.instance.topState as LoadoutState;
 	    if(loadoutState != null)
         {
