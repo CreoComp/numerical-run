@@ -26,20 +26,29 @@ public class CharacterDatabase
 
     static public IEnumerator LoadDatabase()
     {
+        Debug.Log(m_CharactersDict + "    m_CharactersDict");
         if (m_CharactersDict == null)
         {
+            Debug.Log("m_CharactersDict == null");
+
             m_CharactersDict = new Dictionary<string, Character>();
 
             yield return Addressables.LoadAssetsAsync<GameObject>("characters", op =>
             {
+                Debug.Log("Loaded Database1");
+
                 Character c = op.GetComponent<Character>();
                 if (c != null)
                 {
+                    Debug.Log("Loaded Database2");
+
                     m_CharactersDict.Add(c.characterName, c);
                 }
             });
+        Debug.Log("Loaded Database");
 
             m_Loaded = true;
         }
+
     }
 }
