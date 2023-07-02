@@ -97,7 +97,8 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: bafde115fd6ae4745acd0952ace4d78c,
+    type: 2}
   m_LightingSettings: {fileID: 4890085278179872738, guid: d3b0af84f3614d34ebb744cdf5fda625,
     type: 2}
 --- !u!196 &4
@@ -1647,7 +1648,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4122528372401330, guid: fc9855a6b2a67364ebc0db28e7bbc98b, type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4122528372401330, guid: fc9855a6b2a67364ebc0db28e7bbc98b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -24291,7 +24292,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 498512, guid: fb0599b183d2df245a26655842165149, type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 498512, guid: fb0599b183d2df245a26655842165149, type: 3}
       propertyPath: m_LocalPosition.x
@@ -24852,7 +24853,7 @@ Transform:
   m_Children:
   - {fileID: 1617204952}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1967966878
 GameObject:
@@ -30579,7 +30580,7 @@ Transform:
   - {fileID: 184212907}
   - {fileID: 630422118}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &2094493434
 AudioSource:

@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.IO;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 #if UNITY_ANALYTICS
 using UnityEngine.Analytics;
 #endif
@@ -237,9 +236,11 @@ public class PlayerData
 
     static public void Create()
     {
+        Debug.Log("Create PlayerData");
         if (m_Instance == null)
         {
             m_Instance = new PlayerData();
+            Debug.Log("m_Instance == null");
 
             //if we create the PlayerData, mean it's the very first call, so we use that to init the database
             //this allow to always init the database at the earlier we can, i.e. the start screen if started normally on device
@@ -290,9 +291,9 @@ public class PlayerData
         m_Instance.Save();
     }
 
-    public void Read()
+  /*  public void Read()
     {
-        BinaryReader r = new BinaryReader(new FileStream(saveFile, FileMode.Open));
+      /*  BinaryReader r = new BinaryReader(new FileStream(saveFile, FileMode.Open));
         int ver = r.ReadInt32();
 
         if (ver < 6)
@@ -416,16 +417,16 @@ public class PlayerData
         CountGames = r.ReadInt32();
 
         r.Close();
-    }
+    } */
 
     public void AddCoins(int amount)
-    {
-        if (isValidTransaction(amount))
         {
-            Coins += amount;
+            if (isValidTransaction(amount))
+            {
+                Coins += amount;
+            }
+            Save();
         }
-        Save();
-    }
 
     public bool isValidTransaction(int amount) =>
        Coins + amount >= 0;

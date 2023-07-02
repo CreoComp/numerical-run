@@ -113,7 +113,7 @@ namespace YG
 
         static void Message(string message)
         {
-            if (_debug) Debug.Log(message);
+           // if (_debug) Debug.Log(message);
         }
 
         void FirstСalls()
