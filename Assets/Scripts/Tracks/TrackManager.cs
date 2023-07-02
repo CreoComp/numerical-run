@@ -756,17 +756,16 @@ public class TrackManager : MonoBehaviour
                     {
                         m_TimeSinceLastNumber = 0;
 
-                        IEnumerable<GameObjectsTypeId> types =
-                            ((GameObjectsTypeId[])Enum.GetValues(typeof(GameObjectsTypeId))).Where(
-                                x => (int)x < 100);
-                        int count = types.Count();
+                        
                         GameObject spawnerGo = PoolService.Get(GameObjectsTypeId.ObjectSpawner);
                         spawnerGo.gameObject.transform.SetParent(segment.collectibleTransform, true);
                         spawnerGo.transform.position = pos;
                         spawnerGo.transform.rotation = rot;
 
                         PickableObjectSpawner spawner = spawnerGo.GetComponent<PickableObjectSpawner>();
-                        spawner.Construct(types.ElementAt(Random.Range(0, count)), PoolService,
+                        int index = GetNumberIndex();
+                        
+                        spawner.Construct((GameObjectsTypeId) index, PoolService,
                             segment.collectibleTransform, pos, rot);
 
                         toUse = spawner.Spawn();
@@ -789,6 +788,15 @@ public class TrackManager : MonoBehaviour
                 currentWorldPos += increment;
             }
         }
+    }
+
+    private int GetNumberIndex()
+    {
+        float chance = 1 - Random.value;
+        return chance < 0.05 ? 5 :
+            chance > 0.05 && chance < 0.15 ? 4 :
+            chance > 0.15 && chance < 0.3 ? 3 :
+            chance > 0.3 && chance < 0.5 ? 2 : 1;
     }
 
     public void AddScore(int amount)

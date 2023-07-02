@@ -353,7 +353,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   impactedSound: {fileID: 0}
-  DistanceDivider: 20
+  DistanceDivider: 1
   DamageValue: 0
   DamageValueText: {fileID: 3225132188762779445}
 --- !u!114 &2042381312480871988
@@ -369,7 +369,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   impactedSound: {fileID: 0}
-  DistanceDivider: 20
+  DistanceDivider: 1
   DamageValue: 0
   DamageValueText: {fileID: 3225132188762779445}
   minTime: 2
@@ -389,6 +389,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   impactedSound: {fileID: 0}
-  DistanceDivider: 20
+  DistanceDivider: 1
   DamageValue: 0
   DamageValueText: {fileID: 3225132188762779445}
