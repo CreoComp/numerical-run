@@ -1,5 +1,7 @@
 ﻿using System.Collections;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// This script is the base class for implemented obstacles.
@@ -9,10 +11,14 @@ using UnityEngine;
 public abstract class Obstacle : MonoBehaviour
 {
 	public AudioClip impactedSound;
-
     public virtual void Setup() {}
 
-    public abstract IEnumerator Spawn(TrackSegment segment, float t);
+    [Header("Damage")]
+    public int DistanceDivider;
+    public int DamageValue;
+    public TextMeshProUGUI DamageValueText;
+    
+    public abstract IEnumerator Spawn(TrackSegment segment, float t, float worldDistance);
 
 	public virtual void Impacted()
 	{
@@ -32,4 +38,5 @@ public abstract class Obstacle : MonoBehaviour
 			audioSource.Play();
 		}
 	}
+	
 }

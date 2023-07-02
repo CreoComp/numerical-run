@@ -1,8 +1,10 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement;
 using UnityEngine.ResourceManagement.AsyncOperations;
+using Random = UnityEngine.Random;
 
 public class SimpleBarricade : Obstacle
 {
@@ -11,7 +13,7 @@ public class SimpleBarricade : Obstacle
     protected const int k_LeftMostLaneIndex = -1;
     protected const int k_RightMostLaneIndex = 1;
     
-    public override IEnumerator Spawn(TrackSegment segment, float t)
+    public override IEnumerator Spawn(TrackSegment segment, float t, float worldDistance)
     {
         //the tutorial very firts barricade need to be center and alone, so player can swipe safely in bother direction to avoid it
         bool isTutorialFirst = TrackManager.instance.isTutorial && TrackManager.instance.firstObstacle && segment == segment.manager.currentSegment;
@@ -39,6 +41,8 @@ public class SimpleBarricade : Obstacle
                 yield break;
             }
             GameObject obj = op.Result as GameObject;
+            DamageValue = GetObstaclesDamageValue(worldDistance);
+            DamageValueText.text = DamageValue.ToString();
 
             if (obj == null)
                 Debug.Log(gameObject.name);
@@ -54,5 +58,9 @@ public class SimpleBarricade : Obstacle
                 obj.transform.position = oldPos;
             }
         }
+    }
+    public int GetObstaclesDamageValue(float worldDistance)
+    {
+        return Convert.ToInt32(worldDistance / DistanceDivider + 10);
     }
 }

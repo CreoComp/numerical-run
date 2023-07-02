@@ -1,7 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
+using Random = UnityEngine.Random;
 
 public class PatrollingObstacle : Obstacle
 {
@@ -28,7 +30,7 @@ public class PatrollingObstacle : Obstacle
 
     protected const float k_LaneOffsetToFullWidth = 2f;
 
-	public override IEnumerator Spawn(TrackSegment segment, float t)
+	public override IEnumerator Spawn(TrackSegment segment, float t, float worldDistance)
 	{
 		Vector3 position;
 		Quaternion rotation;
@@ -46,6 +48,9 @@ public class PatrollingObstacle : Obstacle
 
         PatrollingObstacle po = obj.GetComponent<PatrollingObstacle>();
         po.m_Segement = segment;
+        DamageValue = GetObstaclesDamageValue(worldDistance);
+        DamageValueText.text = DamageValue.ToString();
+        
 
         //TODO : remove that hack related to #issue7
         Vector3 oldPos = obj.transform.position;
@@ -101,5 +106,9 @@ public class PatrollingObstacle : Obstacle
 		m_CurrentPos += Time.deltaTime * m_MaxSpeed;
 
         transform.localPosition = m_OriginalPosition - transform.right * Mathf.PingPong(m_CurrentPos, m_Segement.manager.laneOffset * k_LaneOffsetToFullWidth);
+	}
+	public int GetObstaclesDamageValue(float worldDistance)
+	{
+		return Convert.ToInt32(worldDistance / DistanceDivider + 10);
 	}
 }

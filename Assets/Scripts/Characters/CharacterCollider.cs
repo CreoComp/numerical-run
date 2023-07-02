@@ -113,6 +113,7 @@ public class CharacterCollider : MonoBehaviour
 				controller.trackManager.PoolService.Return(number.gameObject);
 				//Debug.Log($"Number value: {number.Value}");
 				controller.Numbers += number.Value;
+				controller.currentLife += number.Value;
 				m_Audio.PlayOneShot(coinSound);
             }
 			else if (c.TryGetComponent(out FlashCoin flashCoin))
@@ -127,11 +128,7 @@ public class CharacterCollider : MonoBehaviour
         {
             if (m_Invincible || controller.IsCheatInvincible())
                 return;
-
-            controller.StopMoving();
-
-			c.enabled = false;
-
+            
             Obstacle ob = c.gameObject.GetComponent<Obstacle>() ?? c.gameObject.GetComponentInParent<Obstacle>();
 
             if (ob != null)
@@ -149,10 +146,17 @@ public class CharacterCollider : MonoBehaviour
             }
             else
             {
-                controller.currentLife -= 1;
+                controller.currentLife -= ob.DamageValue;
+                controller.Numbers -= ob.DamageValue;
             }
-
-            controller.character.animator.SetTrigger(s_HitHash);
+			//Use other hit animation
+			if(controller.currentLife < 0)
+			{
+				controller.StopMoving();
+				//c.enabled = false;
+				controller.character.animator.SetTrigger(s_HitHash);
+				m_Collider.enabled = false;
+			}
 
 			if (controller.currentLife > 0)
 			{

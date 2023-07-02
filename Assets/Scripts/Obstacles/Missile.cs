@@ -1,8 +1,10 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement;
 using UnityEngine.ResourceManagement.AsyncOperations;
+using Random = UnityEngine.Random;
 
 /// <summary>
 /// Obstacle that starts moving forward in its lane when the player is close enough.
@@ -30,7 +32,7 @@ public class Missile : Obstacle
 		m_Audio = GetComponent<AudioSource>();
 	}
 
-	public override IEnumerator Spawn(TrackSegment segment, float t)
+	public override IEnumerator Spawn(TrackSegment segment, float t, float worldDistance)
 	{
         int lane = Random.Range(k_LeftMostLaneIndex, k_RightMostLaneIndex + 1);
 
@@ -49,6 +51,9 @@ public class Missile : Obstacle
 
         obj.transform.SetParent(segment.objectRoot, true);
         obj.transform.position += obj.transform.right * lane * segment.manager.laneOffset;
+
+        DamageValue = GetObstaclesDamageValue(worldDistance);
+        DamageValueText.text = DamageValue.ToString();
 
         obj.transform.forward = -obj.transform.forward;
 	    Missile missile = obj.GetComponent<Missile>();
@@ -106,4 +111,9 @@ public class Missile : Obstacle
 			}
 		}
 	}
+	public int GetObstaclesDamageValue(float worldDistance)
+	{
+		return Convert.ToInt32(worldDistance / DistanceDivider + 10);
+	}
 }
+

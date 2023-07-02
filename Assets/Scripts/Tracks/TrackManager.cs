@@ -649,7 +649,9 @@ public class TrackManager : MonoBehaviour
         {
             Obstacle obstacle = obj.GetComponent<Obstacle>();
             if (obstacle != null)
-                yield return obstacle.Spawn(segment, segment.obstaclePositions[posIndex]);
+            {
+                yield return obstacle.Spawn(segment, segment.obstaclePositions[posIndex], m_TotalWorldDistance);
+            }
         }
     }
 
