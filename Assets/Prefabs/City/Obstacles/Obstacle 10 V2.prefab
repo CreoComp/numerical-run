@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2743852027723793998}
   - component: {fileID: 8823844353581390840}
   - component: {fileID: 6803783580576734379}
+  - component: {fileID: 7038511103482161975}
   m_Layer: 9
   m_Name: O10 Part 2
   m_TagString: Untagged
@@ -83,6 +84,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &7038511103482161975
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4652732588010681181}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.4505029, y: 0.5419722, z: 0.45050275}
+  m_Center: {x: 0.000000014901161, y: 0.2710102, z: -0.000000029802322}
 --- !u!1 &5440447434084477037
 GameObject:
   m_ObjectHideFlags: 0
