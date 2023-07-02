@@ -153,9 +153,9 @@ public class CharacterCollider : MonoBehaviour
 			if(controller.currentLife < 0)
 			{
 				controller.StopMoving();
-				//c.enabled = false;
+				c.enabled = false;
 				controller.character.animator.SetTrigger(s_HitHash);
-				m_Collider.enabled = false;
+				//m_Collider.enabled = false;
 			}
 
 			if (controller.currentLife > 0)
