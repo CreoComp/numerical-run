@@ -648,11 +648,20 @@ public class TrackManager : MonoBehaviour
         if (obj != null)
         {
             Obstacle obstacle = obj.GetComponent<Obstacle>();
+            obstacle.DamageValue = GetObstaclesDamageValue(worldDistance);
+            obstacle.DamageValueText.text = obstacle.DamageValue.ToString();
             if (obstacle != null)
             {
+                //Debug.Log($"World distance: {m_TotalWorldDistance}");
                 yield return obstacle.Spawn(segment, segment.obstaclePositions[posIndex], m_TotalWorldDistance);
             }
         }
+    }
+    
+    public int GetObstaclesDamageValue(float worldDistance)
+    {
+        Debug.Log($"world distance : {worldDistance}");
+        return Convert.ToInt32(worldDistance / 1 + 10);
     }
 
     public IEnumerator SpawnCoinAndPowerup(TrackSegment segment)

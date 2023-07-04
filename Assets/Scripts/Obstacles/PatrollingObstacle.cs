@@ -48,8 +48,6 @@ public class PatrollingObstacle : Obstacle
 
         PatrollingObstacle po = obj.GetComponent<PatrollingObstacle>();
         po.m_Segement = segment;
-        DamageValue = GetObstaclesDamageValue(worldDistance);
-        DamageValueText.text = DamageValue.ToString();
         
 
         //TODO : remove that hack related to #issue7
@@ -107,8 +105,5 @@ public class PatrollingObstacle : Obstacle
 
         transform.localPosition = m_OriginalPosition - transform.right * Mathf.PingPong(m_CurrentPos, m_Segement.manager.laneOffset * k_LaneOffsetToFullWidth);
 	}
-	public int GetObstaclesDamageValue(float worldDistance)
-	{
-		return Convert.ToInt32(worldDistance / DistanceDivider + 10);
-	}
+
 }

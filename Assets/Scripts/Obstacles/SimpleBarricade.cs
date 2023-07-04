@@ -41,9 +41,7 @@ public class SimpleBarricade : Obstacle
                 yield break;
             }
             GameObject obj = op.Result as GameObject;
-            DamageValue = GetObstaclesDamageValue(worldDistance);
-            DamageValueText.text = DamageValue.ToString();
-
+            
             if (obj == null)
                 Debug.Log(gameObject.name);
             else
@@ -59,8 +57,5 @@ public class SimpleBarricade : Obstacle
             }
         }
     }
-    public int GetObstaclesDamageValue(float worldDistance)
-    {
-        return Convert.ToInt32(worldDistance / DistanceDivider + 10);
-    }
+    
 }

@@ -52,9 +52,6 @@ public class Missile : Obstacle
         obj.transform.SetParent(segment.objectRoot, true);
         obj.transform.position += obj.transform.right * lane * segment.manager.laneOffset;
 
-        DamageValue = GetObstaclesDamageValue(worldDistance);
-        DamageValueText.text = DamageValue.ToString();
-
         obj.transform.forward = -obj.transform.forward;
 	    Missile missile = obj.GetComponent<Missile>();
 	    missile.m_OwnSegement = segment;
@@ -111,9 +108,6 @@ public class Missile : Obstacle
 			}
 		}
 	}
-	public int GetObstaclesDamageValue(float worldDistance)
-	{
-		return Convert.ToInt32(worldDistance / DistanceDivider + 10);
-	}
+	
 }
 
