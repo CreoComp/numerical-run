@@ -104,10 +104,8 @@ public class CharacterInputController : MonoBehaviour
 		Numbers = 0;
     }
 
-#if !UNITY_STANDALONE
     protected Vector2 m_StartingTouch;
 	protected bool m_IsSwiping = false;
-#endif
 
     // Cheating functions, use for testing
 	public void CheatInvincible(bool invincible)
