@@ -92,6 +92,7 @@ public class GameOverState : AState
 
     public void RunAgain()
     {
+        trackManager.characterController.currentLife = 1;
         trackManager.isRerun = false;
         manager.SwitchState("Game");
     }

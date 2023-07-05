@@ -36,10 +36,8 @@ public class Pool
 
     public void ClearPool()
     {
-        Debug.Log($"Clear Pool {Enum.GetName(typeof(GameObjectsTypeId), _type)}");
         foreach (GameObject go in _repository)
         {
-            Debug.Log($"Gameobject name {go.name}");
             Object.Destroy(go);
         }
 

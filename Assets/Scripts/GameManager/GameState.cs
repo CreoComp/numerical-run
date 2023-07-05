@@ -194,6 +194,7 @@ public class GameState : AState
 
     public override void Tick()
     {
+        Debug.Log(trackManager.characterController.currentLife);
         if (m_Finished)
         {
             //if we are finished, we check if advertisement is ready, allow to disable the button until it is ready
