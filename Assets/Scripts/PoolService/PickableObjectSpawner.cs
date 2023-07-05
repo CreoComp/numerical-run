@@ -36,6 +36,6 @@ public class PickableObjectSpawner : MonoBehaviour
 
     private bool GetChance()
     {
-        return Random.value < _chanceOfStaying;
+        return true; //Random.value < _chanceOfStaying;
     }
 }

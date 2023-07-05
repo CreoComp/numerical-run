@@ -208,12 +208,13 @@ public class GameState : AState
 
             m_TimeSinceStart += Time.deltaTime;
 
-            if (chrCtrl.currentLife <= 0)
+            if (chrCtrl.currentLife < 0)
             {
+                chrCtrl.currentLife = 0;
                 pauseButton.gameObject.SetActive(false);
                 chrCtrl.CleanConsumable();
-                if(chrCtrl.character.animator != null)
-                chrCtrl.character.animator.SetBool("Dead", true);
+                if(chrCtrl.character != null)
+                    chrCtrl.character.animator.SetBool("Dead", true);
                 chrCtrl.characterCollider.koParticle.gameObject.SetActive(true);
                 StartCoroutine(WaitForGameOver());
             }

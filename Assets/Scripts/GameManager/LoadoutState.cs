@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
@@ -173,7 +174,7 @@ public class LoadoutState : AState
 
 	public void GoToStore()
 	{
-        UnityEngine.SceneManagement.SceneManager.LoadScene(k_ShopSceneName, UnityEngine.SceneManagement.LoadSceneMode.Additive);
+        SceneManager.LoadScene(k_ShopSceneName);
 	}
 
     public void ChangeCharacter(int dir)
