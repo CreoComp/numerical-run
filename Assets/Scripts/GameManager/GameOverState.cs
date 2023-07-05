@@ -80,7 +80,7 @@ public class GameOverState : AState
 
 	public void GoToStore()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("shop", UnityEngine.SceneManagement.LoadSceneMode.Additive);
+        UnityEngine.SceneManagement.SceneManager.LoadScene("shop");
     }
 
 

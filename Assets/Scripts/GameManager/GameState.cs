@@ -208,7 +208,7 @@ public class GameState : AState
 
             m_TimeSinceStart += Time.deltaTime;
 
-            if (chrCtrl.currentLife < 0)
+            if (chrCtrl.currentLife <= 0)
             {
                 chrCtrl.currentLife = 0;
                 pauseButton.gameObject.SetActive(false);
